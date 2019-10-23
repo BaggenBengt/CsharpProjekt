@@ -9,5 +9,6 @@ namespace Data
     public class Class1
     {
         string a = "hej";
+        int b = 0;
     }
 }
