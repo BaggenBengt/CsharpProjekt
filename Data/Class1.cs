@@ -10,5 +10,6 @@ namespace Data
     {
         string a = "hej";
         int b = 0;
+        string c = "...";
     }
 }
