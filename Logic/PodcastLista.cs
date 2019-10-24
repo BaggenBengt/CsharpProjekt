@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Logic
 {
-    public class Class1
+    public static class PodcastLista
     {
-        string a = "hej";
+        public static List<Podcast> SparadePodcasts { get; set; }
+
     }
 }

@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic;
 
 namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
+
         public PodcastAppen()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace CsharpProjekt
         private void FillPodcastList()
         {
             lwPodcast.Clear();
-           var podcasts = getPodcasts();
+           var podcasts = 
              
             foreach (var podcast in podcasts)
             {
@@ -56,6 +58,15 @@ namespace CsharpProjekt
             //this.cbKategori.SelectedIndex = 0;
             this.tbAvsnittBeskrivning.ReadOnly = true;
         }
-        
+
+        private void btNyPod_Click(object sender, EventArgs e)
+        {
+            var url = tbUrlPod.Text;
+            var frekvens = cbFrekvens.SelectedItem.ToString();
+            var kategori = cbKategori.SelectedItem.ToString();
+
+            var nyPodcast = new Podcast(url, kategori, frekvens);
+            PodcastLista.SparadePodcasts.Add(nyPodcast);
+        }
     }
 }

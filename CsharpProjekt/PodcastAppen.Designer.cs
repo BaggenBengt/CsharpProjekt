@@ -38,7 +38,12 @@
             this.tbUrlPod = new System.Windows.Forms.TextBox();
             this.lwKategori = new System.Windows.Forms.ListView();
             this.lwPodcast = new System.Windows.Forms.ListView();
+            this.Namn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Avsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Frekvens = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Kategori = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lwPodAvsnitt = new System.Windows.Forms.ListView();
+            this.PodcastAvsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbAvsnittBeskrivning = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,11 +54,6 @@
             this.cbFrekvens = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.Namn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Avsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Frekvens = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Kategori = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PodcastAvsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btNyPod
@@ -64,6 +64,7 @@
             this.btNyPod.TabIndex = 0;
             this.btNyPod.Text = "Ny";
             this.btNyPod.UseVisualStyleBackColor = true;
+            this.btNyPod.Click += new System.EventHandler(this.btNyPod_Click);
             // 
             // btTaBortPod
             // 
@@ -149,6 +150,26 @@
             this.lwPodcast.UseCompatibleStateImageBehavior = false;
             this.lwPodcast.View = System.Windows.Forms.View.Details;
             // 
+            // Namn
+            // 
+            this.Namn.Text = "Namn";
+            this.Namn.Width = 150;
+            // 
+            // Avsnitt
+            // 
+            this.Avsnitt.Text = "Avsnitt";
+            this.Avsnitt.Width = 50;
+            // 
+            // Frekvens
+            // 
+            this.Frekvens.Text = "Frekvens";
+            this.Frekvens.Width = 110;
+            // 
+            // Kategori
+            // 
+            this.Kategori.Text = "Kategori";
+            this.Kategori.Width = 110;
+            // 
             // lwPodAvsnitt
             // 
             this.lwPodAvsnitt.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -160,6 +181,11 @@
             this.lwPodAvsnitt.TabIndex = 10;
             this.lwPodAvsnitt.UseCompatibleStateImageBehavior = false;
             this.lwPodAvsnitt.View = System.Windows.Forms.View.Details;
+            // 
+            // PodcastAvsnitt
+            // 
+            this.PodcastAvsnitt.Text = "Avsnitt";
+            this.PodcastAvsnitt.Width = 425;
             // 
             // tbAvsnittBeskrivning
             // 
@@ -259,31 +285,6 @@
             this.label7.Size = new System.Drawing.Size(106, 15);
             this.label7.TabIndex = 20;
             this.label7.Text = "Avsnitt beskrivning";
-            // 
-            // Namn
-            // 
-            this.Namn.Text = "Namn";
-            this.Namn.Width = 150;
-            // 
-            // Avsnitt
-            // 
-            this.Avsnitt.Text = "Avsnitt";
-            this.Avsnitt.Width = 50;
-            // 
-            // Frekvens
-            // 
-            this.Frekvens.Text = "Frekvens";
-            this.Frekvens.Width = 110;
-            // 
-            // Kategori
-            // 
-            this.Kategori.Text = "Kategori";
-            this.Kategori.Width = 110;
-            // 
-            // PodcastAvsnitt
-            // 
-            this.PodcastAvsnitt.Text = "Avsnitt";
-            this.PodcastAvsnitt.Width = 425;
             // 
             // PodcastAppen
             // 

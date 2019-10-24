@@ -19,7 +19,8 @@ namespace CsharpProjekt
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PodcastAppen());
-            string i = "Hejsan";
+
+            var podcastLista = new PodcastLista();
         }
     }
 }
