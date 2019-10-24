@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public static class PodcastLista
+    public class PodcastLista : List<Podcast>
     {
-        public static List<Podcast> SparadePodcasts { get; set; }
-
+        //public List<Podcast> SparadePodcasts { get; set; }
+       
     }
 }

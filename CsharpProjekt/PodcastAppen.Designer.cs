@@ -149,6 +149,7 @@
             this.lwPodcast.TabIndex = 9;
             this.lwPodcast.UseCompatibleStateImageBehavior = false;
             this.lwPodcast.View = System.Windows.Forms.View.Details;
+            this.lwPodcast.SelectedIndexChanged += new System.EventHandler(this.lwPodcast_SelectedIndexChanged);
             // 
             // Namn
             // 
@@ -271,6 +272,8 @@
             // 
             this.cbKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbKategori.FormattingEnabled = true;
+            this.cbKategori.Items.AddRange(new object[] {
+            "Skräck"});
             this.cbKategori.Location = new System.Drawing.Point(365, 231);
             this.cbKategori.Name = "cbKategori";
             this.cbKategori.Size = new System.Drawing.Size(95, 21);

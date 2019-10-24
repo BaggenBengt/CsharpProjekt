@@ -20,7 +20,7 @@ namespace CsharpProjekt
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PodcastAppen());
 
-            var podcastLista = new PodcastLista();
+         //   var podcastLista = new PodcastLista();
         }
     }
 }
