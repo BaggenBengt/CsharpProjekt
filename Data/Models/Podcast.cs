@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 
 namespace Data
 {
-   public class Podcast
+   public class Podcast : Media
     {
         public string Name { get; set; }
         public string Url {get; set;}
         public string Frekvens {get; set;}
         public string Kategori { get; set;}
-       // public List<Avsnitt> AvsnittLista { get; set; }
+        public List<Avsnitt> AvsnittLista { get; set; }
         public int AntalAvsnitt { get; set; }
 
         public Podcast()
@@ -28,14 +29,14 @@ namespace Data
             Name = "test";
 
             var dWR = new DataWriteRead();
-            //AvsnittLista = dWR.getAvsnittFromUrl(url);
+            AvsnittLista = dWR.getAvsnittFromUrl(url);
 
-            //AntalAvsnitt = getAntalAvsnitt();
+            AntalAvsnitt = getAntalAvsnitt();
         }
 
-        //private int getAntalAvsnitt()
-        //{
-        //    return AvsnittLista.Count();
-        //}
+        private int getAntalAvsnitt()
+        {
+            return AvsnittLista.Count();
+        }
     }
 }

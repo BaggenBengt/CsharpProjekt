@@ -83,6 +83,7 @@
             this.btAndraPod.TabIndex = 2;
             this.btAndraPod.Text = "Ändra";
             this.btAndraPod.UseVisualStyleBackColor = true;
+            this.btAndraPod.Click += new System.EventHandler(this.btAndraPod_Click);
             // 
             // btAndraKatagori
             // 

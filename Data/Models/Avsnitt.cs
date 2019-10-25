@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 
 namespace Data
 {
-    public class Avsnitt
+    public class Avsnitt : Media
     {
-        public string Beskrivning { get; internal set; }
-        public string Title { get; internal set; }
+        public string Beskrivning { get; set; }
+        public string Title { get; set; }
     }
 }

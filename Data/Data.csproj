@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="DataWriteRead.cs" />
     <Compile Include="Models\Avsnitt.cs" />
+    <Compile Include="Models\Media.cs" />
     <Compile Include="Models\Podcast.cs" />
     <Compile Include="Models\PodcastLista.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

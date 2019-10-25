@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Data;
+using Data.Models;
 using Newtonsoft.Json;
 
 namespace Logic
@@ -41,7 +42,7 @@ namespace Logic
         public void getSparadPodcastLista()
         {
             var dWR = new DataWriteRead();
-          // allaPodcasts = dWR.getSparadPodcastListaFromJson();
+            allaPodcasts = dWR.getSparadPodcastListaFromJson();
         }
 
         public List<List<string>> ConvertPodcastListToString() 
@@ -55,10 +56,10 @@ namespace Logic
                 var frekvens = podcast.Frekvens;
                 var name = podcast.Name;
 
-                podcastProperty.Add(kategori);
+                podcastProperty.Add(name);
                 podcastProperty.Add(antalavsnitt);
                 podcastProperty.Add(frekvens);
-                podcastProperty.Add(name);
+                podcastProperty.Add(kategori);
 
                 allPodcastsInString.Add(podcastProperty);
                

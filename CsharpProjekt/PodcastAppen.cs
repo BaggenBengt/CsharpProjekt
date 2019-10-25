@@ -20,8 +20,8 @@ namespace CsharpProjekt
             InitializeComponent();
             LoadForm();
             bll = new Bll();
-            //bll.getSparadPodcastLista();
-            //FillPodcastList();
+            bll.getSparadPodcastLista();
+            FillPodcastList();
 
         }
 
@@ -31,21 +31,34 @@ namespace CsharpProjekt
 
            var podcastLista = bll.ConvertPodcastListToString();
 
+            int i = 0;
+            
             foreach (var podcast in podcastLista)
             {
-                int i = 0;
-                while (i < 4)
+
+
+                //if (podcastLista[i].Count == i - 3)
+                //{
+
+                //}
+                int ind = 0;
+                while (ind < 4)
                 {
                     ListViewItem item = new ListViewItem(podcast[i]);
                     i++;
+                    ind++;
                     item.SubItems.Add(podcast[i]);
                     i++;
+                    ind++;
                     item.SubItems.Add(podcast[i]);
                     i++;
+                    ind++;
                     item.SubItems.Add(podcast[i]);
                     lwPodcast.Items.Add(item);
                     i++;
+                    ind++;
                 }
+                
             }
         }
 
@@ -82,9 +95,12 @@ namespace CsharpProjekt
             var kategori = cbKategori.SelectedItem.ToString();
 
             bll.nyPodcast(url, kategori, frekvens);
-           
-            
-            
+            bll.sparaPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+
+
+
 
 
             //ListViewItem item = new ListViewItem(nyPodcast.Name);
@@ -118,6 +134,11 @@ namespace CsharpProjekt
         private void PodcastAppen_Load(object sender, EventArgs e)
         {
             bll.sparaPodcastLista();
+        }
+
+        private void btAndraPod_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -7,6 +7,7 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Data.Models;
 using Newtonsoft.Json;
 
 namespace Data
@@ -49,7 +50,7 @@ namespace Data
             return PoddensAvsnitt;
         } 
 
-        public PodcastLista getSparadPodcastListaFromJson()
+        public List<Podcast> getSparadPodcastListaFromJson()
         {
             var serializer = new JsonSerializer
             {
@@ -60,7 +61,7 @@ namespace Data
             {
                 using (var jtr = new JsonTextReader(sr))
                 {
-                    PodcastLista podcastLista = serializer.Deserialize<PodcastLista>(jtr);
+                    List<Podcast> podcastLista = serializer.Deserialize<List<Podcast>>(jtr);
                     return podcastLista;
                 }
                 
