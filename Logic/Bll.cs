@@ -22,6 +22,30 @@ namespace Logic
            
 
         }
+        public List<string> getPodcastAvsnittToString(string name)
+        {
+            List<string> allaAvsnittToString = new List<string>();
+            var sortedPodcastListByName = getPodcastListByName(name);
+
+            foreach(var podcast in sortedPodcastListByName)
+            {
+                List<Avsnitt> allaAvsnitt = podcast.AvsnittLista;
+
+                foreach (var avsnitt in allaAvsnitt)
+                {
+                    string avsnittTitle = avsnitt.Title.ToString();
+                    allaAvsnittToString.Add(avsnittTitle);
+                }
+            }
+            return allaAvsnittToString;
+        }
+        private List<Podcast> getPodcastListByName(string name)
+        {
+            return allaPodcasts
+                               .Where(pod => pod.Name.Equals(name))
+                               .ToList();
+
+        }
         public void nyPodcast(string url, string kategori, string frekvens)
         {
             Podcast nyPodcast = new Podcast(url, kategori, frekvens);

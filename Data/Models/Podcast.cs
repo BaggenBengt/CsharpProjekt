@@ -26,10 +26,10 @@ namespace Data
             Url = url;
             Kategori = kategori;
             Frekvens = frekvens;
-            Name = "test";
 
             var dWR = new DataWriteRead();
             AvsnittLista = dWR.getAvsnittFromUrl(url);
+            Name = dWR.getPodcastTitleFromUrl(url);
 
             AntalAvsnitt = getAntalAvsnitt();
         }

@@ -32,6 +32,13 @@ namespace Data
                     }
             }
         }
+        public string getPodcastTitleFromUrl(string url)
+        {
+             var reader = XmlReader.Create(url);
+            reader.ReadToFollowing("title");
+            string title = reader.ReadElementContentAsString();
+             return title;
+        }
         public List<Avsnitt> getAvsnittFromUrl(string url)
         {
             var reader = XmlReader.Create(url);

@@ -27,20 +27,12 @@ namespace CsharpProjekt
 
         private void FillPodcastList()
         {
-            // lwPodcast.Clear();
-
            var podcastLista = bll.ConvertPodcastListToString();
 
             int i = 0;
             
             foreach (var podcast in podcastLista)
             {
-
-
-                //if (podcastLista[i].Count == i - 3)
-                //{
-
-                //}
                 int ind = 0;
                 while (ind < 4)
                 {
@@ -62,17 +54,16 @@ namespace CsharpProjekt
             }
         }
 
-        /* private void FillAvsnittList(Podcast podcast)
-         {
-             lwPodAvsnitt.Clear();
-             var avsnittList = podcast.getAvsnitt();
-
-             foreach (var avsnitt in avsnittList)
-             {
-                 ListViewItem item = new ListViewItem(avsnitt.Name);
-                 lwPodAvsnitt.Items.Add(item);
-             }
-         }*/
+         //private void FillAvsnittList(List<string> avsnittList)
+         //{
+         //    lwPodAvsnitt.Items.Clear();
+             
+         //    foreach (var avsnitt in avsnittList)
+         //    {
+         //        ListViewItem item = new ListViewItem(avsnitt.Name);
+         //        lwPodAvsnitt.Items.Add(item);
+         //    }
+         //}
 
         //private void FillAvsnittBeskrivning(Avsnitt avsnitt)
         //{
@@ -97,29 +88,27 @@ namespace CsharpProjekt
             bll.nyPodcast(url, kategori, frekvens);
             bll.sparaPodcastLista();
             lwPodcast.Items.Clear();
-            FillPodcastList();
-
-
-
-
-
-            //ListViewItem item = new ListViewItem(nyPodcast.Name);
-            //item.SubItems.Add(nyPodcast.AntalAvsnitt.ToString());
-            //item.SubItems.Add(nyPodcast.Frekvens);
-            //item.SubItems.Add(nyPodcast.Kategori);
-            //lwPodcast.Items.Add(item);
-        }
+            FillPodcastList(); }
 
         private void lwPodcast_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             var selected = lwPodcast.SelectedItems;
             if (selected.Count > 0)
             {
+                lwPodAvsnitt.Items.Clear();
                 foreach (ListViewItem item in selected)
                 {
-                    var test = item.SubItems[0].Text;
-                    ListViewItem item1 = new ListViewItem(test);
-                    lwPodAvsnitt.Items.Add(item1);
+                    var namn = item.SubItems[0].Text;
+                    var allaAvsnitt = bll.getPodcastAvsnittToString(namn);
+                    foreach(var avsnitt in allaAvsnitt)
+                    {
+                        var avsnittTitle = avsnitt;
+                        ListViewItem item1 = new ListViewItem(avsnittTitle);
+                        lwPodAvsnitt.Items.Add(item1);
+                    }
+
+
 
                 }
             }
