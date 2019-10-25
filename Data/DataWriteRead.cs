@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -12,65 +13,59 @@ namespace Data
 {
     public class DataWriteRead
     {
-        public string Path { get; set; }
-        public void readURL(string url)
+
+        public void sparaPodcastListaTillJson(List<Podcast> podcastLista)
         {
-            var path = @"C:\Users\mathi\OneDrive\Dokument\GitHub\CsharpProjekt\podcastXML.xml";
-            WebClient webClient = new WebClient();
-            webClient.DownloadFile(url, path);
-
-            Path = path;
-        }
-
-        public string returnPath()
-        {
-
-
-            return Path;
-        }
-
-        public void savePodcasts(string podcasts)
-        {
-            var serializer = new JsonSerializer
+            var Serializer = new JsonSerializer
             {
                 TypeNameHandling = TypeNameHandling.All
             };
 
-            using (var sw = new StreamWriter("file.Json"))
+            using (var sw = new StreamWriter("sparadepodcasts.Json"))
             {
-                using (var jtw = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(jtw, podcasts);
-                }
+                    using (var jtw = new JsonTextWriter(sw))
+                    {
+                    
+                        Serializer.Serialize(jtw, podcastLista);
+
+                    }
             }
         }
+        public List<Avsnitt> getAvsnittFromUrl(string url)
+        {
+            var reader = XmlReader.Create(url);
+            var feed = SyndicationFeed.Load(reader);
 
-        public string GetDataFromJson()
+            List<Avsnitt> PoddensAvsnitt = new List<Avsnitt>();
+
+            foreach(var i in feed.Items)
+            {
+                Avsnitt avsnitt = new Avsnitt();
+                avsnitt.Title = i.Title.Text;
+                avsnitt.Beskrivning = i.Summary.Text;
+                PoddensAvsnitt.Add(avsnitt);
+
+            }
+            return PoddensAvsnitt;
+        } 
+
+        public PodcastLista getSparadPodcastListaFromJson()
         {
             var serializer = new JsonSerializer
             {
                 TypeNameHandling = TypeNameHandling.All
             };
 
-            using (var sr = new StreamReader("file.Json"))
+            using (var sr = new StreamReader("sparadepodcasts.Json"))
             {
                 using (var jtr = new JsonTextReader(sr))
                 {
-                    string str = serializer.Deserialize<string>(jtr);
-                    return str;
+                    PodcastLista podcastLista = serializer.Deserialize<PodcastLista>(jtr);
+                    return podcastLista;
                 }
+                
             }
             
         }
-
-        public string returnFilePath()
-        {
-            string path = @"C:\Users\mathi\OneDrive\Dokument\GitHub\CsharpProjekt\CsharpProjekt\bin\Debug";
-            return path;
-        }
-
-
-
-
     }
 }

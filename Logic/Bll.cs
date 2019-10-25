@@ -11,65 +11,59 @@ using Newtonsoft.Json;
 
 namespace Logic
 {
-    public static class Bll
+    public class Bll
     {
-        public static string Path { get; set; }
-        public static void skickaUrl(string url)
+        public List<Podcast> allaPodcasts { get; set; }
+
+        public Bll()
+        {
+            allaPodcasts = new List<Podcast>();
+           
+
+        }
+        public void nyPodcast(string url, string kategori, string frekvens)
+        {
+            Podcast nyPodcast = new Podcast(url, kategori, frekvens);
+            addNyPodcastToList(nyPodcast);
+        }
+
+        private void addNyPodcastToList(Podcast nyPodcast)
+        {
+            allaPodcasts.Add(nyPodcast);
+        }
+
+        public void sparaPodcastLista()
         {
             var dWR = new DataWriteRead();
-            dWR.readURL(url);
-            Path = dWR.Path;
-
+            dWR.sparaPodcastListaTillJson(allaPodcasts);
         }
 
-        public static List<Avsnitt> getAvsnitt()
+        public void getSparadPodcastLista()
         {
+            var dWR = new DataWriteRead();
+          // allaPodcasts = dWR.getSparadPodcastListaFromJson();
+        }
 
-            var reader = XmlReader.Create(Path);
-            var feed = SyndicationFeed.Load(reader);
-
-            List<Avsnitt> poddensAvsnitt = new List<Avsnitt>();
-
-            //Loop through all items in the SyndicationFeed
-            foreach (var i in feed.Items)
+        public List<List<string>> ConvertPodcastListToString() 
+        {
+            var allPodcastsInString = new List<List<string>>();
+            var podcastProperty = new List<string>();
+            foreach (Podcast podcast in allaPodcasts)
             {
-                Avsnitt avsnitt = new Avsnitt();
-                avsnitt.Title = i.Title.Text;
-                avsnitt.Beskrivning = i.Summary.Text;
-                poddensAvsnitt.Add(avsnitt);
+                var kategori = podcast.Kategori;
+                var antalavsnitt = podcast.AntalAvsnitt.ToString();
+                var frekvens = podcast.Frekvens;
+                var name = podcast.Name;
+
+                podcastProperty.Add(kategori);
+                podcastProperty.Add(antalavsnitt);
+                podcastProperty.Add(frekvens);
+                podcastProperty.Add(name);
+
+                allPodcastsInString.Add(podcastProperty);
+               
             }
-
-            return poddensAvsnitt;
-        }
-
-        private static string objToString(PodcastLista obj)
-        {
-            string objToString = JsonConvert.SerializeObject(obj);
-            return objToString;
-        }
-
-        public static void sparaTillJsonFil(PodcastLista lista)
-        {
-            DataWriteRead dWR = new DataWriteRead();
-            dWR.savePodcasts(objToString(lista));
-        }
-
-        public static PodcastLista GetDataFromJson()
-        {
-            var serializer = new JsonSerializer
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-
-            using (var sr = new StreamReader("file.Json"))
-            {
-                using (var jtr = new JsonTextReader(sr))
-                {
-                    PodcastLista str = serializer.Deserialize<PodcastLista>(jtr);
-                    return str;
-                }
-            }
-
+            return allPodcastsInString;
         }
     }
 }

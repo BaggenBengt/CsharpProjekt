@@ -124,6 +124,7 @@
             this.tbUrlPod.Name = "tbUrlPod";
             this.tbUrlPod.Size = new System.Drawing.Size(196, 20);
             this.tbUrlPod.TabIndex = 7;
+            this.tbUrlPod.TextChanged += new System.EventHandler(this.tbUrlPod_TextChanged);
             // 
             // lwKategori
             // 
@@ -317,6 +318,7 @@
             this.Controls.Add(this.btNyPod);
             this.Name = "PodcastAppen";
             this.Text = "Podcast";
+            this.Load += new System.EventHandler(this.PodcastAppen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

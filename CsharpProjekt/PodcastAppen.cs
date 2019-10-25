@@ -13,28 +13,39 @@ namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
+        public Bll bll { get; set; }
 
         public PodcastAppen()
         {
             InitializeComponent();
             LoadForm();
-            FillPodcastList();
+            bll = new Bll();
+            //bll.getSparadPodcastLista();
+            //FillPodcastList();
 
         }
 
         private void FillPodcastList()
         {
-            lwPodcast.Clear();
-            var podcasts = Bll.GetDataFromJson();
+            // lwPodcast.Clear();
 
+           var podcastLista = bll.ConvertPodcastListToString();
 
-            foreach (var podcast in podcasts)
+            foreach (var podcast in podcastLista)
             {
-                ListViewItem item = new ListViewItem(podcast.Name);
-                item.SubItems.Add(podcast.AntalAvsnitt.ToString());
-                item.SubItems.Add(podcast.Frekvens);
-                item.SubItems.Add(podcast.Kategori);
-                lwPodcast.Items.Add(item);
+                int i = 0;
+                while (i < 4)
+                {
+                    ListViewItem item = new ListViewItem(podcast[i]);
+                    i++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    item.SubItems.Add(podcast[i]);
+                    lwPodcast.Items.Add(item);
+                    i++;
+                }
             }
         }
 
@@ -50,11 +61,11 @@ namespace CsharpProjekt
              }
          }*/
 
-        private void FillAvsnittBeskrivning(Avsnitt avsnitt)
-        {
-            tbAvsnittBeskrivning.Clear();
-            tbAvsnittBeskrivning.Text = avsnitt.Beskrivning;
-        }
+        //private void FillAvsnittBeskrivning(Avsnitt avsnitt)
+        //{
+        //    tbAvsnittBeskrivning.Clear();
+        //    tbAvsnittBeskrivning.Text = avsnitt.Beskrivning;
+        //}
         private void LoadForm()
         {
             this.cbFrekvens.SelectedIndex = 0;
@@ -70,17 +81,17 @@ namespace CsharpProjekt
             var frekvens = cbFrekvens.SelectedItem.ToString();
             var kategori = cbKategori.SelectedItem.ToString();
 
-            var nyPodcast = new Podcast(url, kategori, frekvens);
-            var lista = new PodcastLista();
-            lista.Add(nyPodcast);
-            Bll.sparaTillJsonFil(lista);
+            bll.nyPodcast(url, kategori, frekvens);
+           
+            
+            
 
 
-            ListViewItem item = new ListViewItem(nyPodcast.Name);
-            item.SubItems.Add(nyPodcast.AntalAvsnitt.ToString());
-            item.SubItems.Add(nyPodcast.Frekvens);
-            item.SubItems.Add(nyPodcast.Kategori);
-            lwPodcast.Items.Add(item);
+            //ListViewItem item = new ListViewItem(nyPodcast.Name);
+            //item.SubItems.Add(nyPodcast.AntalAvsnitt.ToString());
+            //item.SubItems.Add(nyPodcast.Frekvens);
+            //item.SubItems.Add(nyPodcast.Kategori);
+            //lwPodcast.Items.Add(item);
         }
 
         private void lwPodcast_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,6 +108,16 @@ namespace CsharpProjekt
                 }
             }
 
+        }
+
+        private void tbUrlPod_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PodcastAppen_Load(object sender, EventArgs e)
+        {
+            bll.sparaPodcastLista();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic
+namespace Data
 {
    public class Podcast
     {
@@ -12,7 +12,7 @@ namespace Logic
         public string Url {get; set;}
         public string Frekvens {get; set;}
         public string Kategori { get; set;}
-        public List<Avsnitt> AvsnittLista { get; set; }
+       // public List<Avsnitt> AvsnittLista { get; set; }
         public int AntalAvsnitt { get; set; }
 
         public Podcast()
@@ -27,15 +27,15 @@ namespace Logic
             Frekvens = frekvens;
             Name = "test";
 
-            Bll.skickaUrl(Url);
-            AvsnittLista = Bll.getAvsnitt();
-            AntalAvsnitt = getAntalAvsnitt();
+            var dWR = new DataWriteRead();
+            //AvsnittLista = dWR.getAvsnittFromUrl(url);
 
+            //AntalAvsnitt = getAntalAvsnitt();
         }
 
-        private int getAntalAvsnitt()
-        {
-            return AvsnittLista.Count();
-        }
+        //private int getAntalAvsnitt()
+        //{
+        //    return AvsnittLista.Count();
+        //}
     }
 }
