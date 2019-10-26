@@ -161,7 +161,7 @@ namespace CsharpProjekt
             bll.getSparadPodcastLista();
             lwPodcast.Items.Clear();
             FillPodcastList();
-
+            lwPodAvsnitt.Items.Clear();
         }
 
         private void btTaBortKategori_Click(object sender, EventArgs e)
