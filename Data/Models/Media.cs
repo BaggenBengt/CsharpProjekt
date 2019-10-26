@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Data.Models
 {
-    public class Class1
+   public class Media
     {
-        string a = "hej";
-        int b = 0;
-        string c = "...";
     }
 }
