@@ -88,5 +88,15 @@ namespace Data
             File.WriteAllText("sparadepodcasts.json", output);
 
         }
+
+        public void DeleteJsonItem(String podcast)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            var items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Podcast>>(json);
+
+            var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Name != podcast));
+            File.WriteAllText("sparadepodcasts.json", newJsonString);
+
+        }
     }
 }

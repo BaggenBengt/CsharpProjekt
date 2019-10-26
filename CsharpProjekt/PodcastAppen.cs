@@ -155,9 +155,13 @@ namespace CsharpProjekt
 
         private void btTaBortPod_Click(object sender, EventArgs e)
         {
-            
             int index = lwPodcast.SelectedIndices[0];
-            
+            string namn = lwPodcast.Items[index].SubItems[0].Text;
+            bll.DeleteJsonItem(namn);
+            bll.getSparadPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+
         }
 
         private void btTaBortKategori_Click(object sender, EventArgs e)

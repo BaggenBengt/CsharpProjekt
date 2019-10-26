@@ -111,5 +111,12 @@ namespace Logic
             dWr.ChangeJsonData(kategori, frekvens, index);
 
         }
+
+        public void DeleteJsonItem(string podcastnamn)
+        {
+            var dWr = new DataWriteRead();
+            dWr.DeleteJsonItem(podcastnamn);
+
+        }
     }
 }
