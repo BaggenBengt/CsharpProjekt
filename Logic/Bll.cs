@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,26 @@ namespace Logic
                
             }
             return allPodcastsInString;
+        }
+
+        public void AddCategori(string dir) { 
+         
+         var newdir = dir;
+            if (Directory.Exists(newdir))
+            {
+                
+            } else
+            {
+                Directory.CreateDirectory(newdir);
+            }
+        
+        }
+
+        public void ChangeJsonData(string kategori, string frekvens, int index)
+        {
+            var dWr = new DataWriteRead();
+            dWr.ChangeJsonData(kategori, frekvens, index);
+
         }
     }
 }

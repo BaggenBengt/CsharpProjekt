@@ -75,5 +75,18 @@ namespace Data
             }
             
         }
+
+        public void ChangeJsonData(string kategori, string frekvens, int index)
+        {
+
+            string json = File.ReadAllText("sparadepodcasts.json");
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            jsonObj[index]["Kategori"] = kategori;
+            jsonObj[index]["Frekvens"] = frekvens;
+           
+            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText("sparadepodcasts.json", output);
+
+        }
     }
 }

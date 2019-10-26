@@ -13,6 +13,7 @@ namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
+         
         public Bll bll { get; set; }
 
         public PodcastAppen()
@@ -127,6 +128,41 @@ namespace CsharpProjekt
 
         private void btAndraPod_Click(object sender, EventArgs e)
         {
+            string kategori = cbKategori.Text;
+            string frekvens = cbFrekvens.Text;
+            int index = lwPodcast.SelectedIndices[0];
+            string namn = lwPodcast.Items[index].SubItems[0].Text;
+
+            bll.ChangeJsonData(kategori, frekvens, index);
+
+            bll.getSparadPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+
+
+        }
+
+        private void btNyKategori_Click(object sender, EventArgs e)
+        {
+            var newdir = tbKategori.Text;
+            bll.AddCategori(newdir);
+        }
+
+        private void cbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btTaBortPod_Click(object sender, EventArgs e)
+        {
+            
+            int index = lwPodcast.SelectedIndices[0];
+            
+        }
+
+        private void btTaBortKategori_Click(object sender, EventArgs e)
+        {
+            
             
         }
     }
