@@ -54,6 +54,8 @@
             this.cbFrekvens = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btSortera = new System.Windows.Forms.Button();
+            this.btReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btNyPod
@@ -318,11 +320,33 @@
             this.label7.TabIndex = 20;
             this.label7.Text = "Avsnitt beskrivning";
             // 
+            // btSortera
+            // 
+            this.btSortera.Location = new System.Drawing.Point(712, 417);
+            this.btSortera.Name = "btSortera";
+            this.btSortera.Size = new System.Drawing.Size(98, 35);
+            this.btSortera.TabIndex = 21;
+            this.btSortera.Text = "Sortera";
+            this.btSortera.UseVisualStyleBackColor = true;
+            this.btSortera.Click += new System.EventHandler(this.btSortera_Click);
+            // 
+            // btReset
+            // 
+            this.btReset.Location = new System.Drawing.Point(712, 355);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(98, 35);
+            this.btReset.TabIndex = 22;
+            this.btReset.Text = "Återställ";
+            this.btReset.UseVisualStyleBackColor = true;
+            this.btReset.Click += new System.EventHandler(this.btReset_Click);
+            // 
             // PodcastAppen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 820);
+            this.Controls.Add(this.btReset);
+            this.Controls.Add(this.btSortera);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbKategori);
             this.Controls.Add(this.cbFrekvens);
@@ -381,6 +405,8 @@
         private System.Windows.Forms.ColumnHeader Frekvens;
         private System.Windows.Forms.ColumnHeader Kategori;
         private System.Windows.Forms.ColumnHeader PodcastAvsnitt;
+        private System.Windows.Forms.Button btSortera;
+        private System.Windows.Forms.Button btReset;
     }
 }
 

@@ -144,8 +144,7 @@ namespace CsharpProjekt
 
         private void btNyKategori_Click(object sender, EventArgs e)
         {
-            var newdir = tbKategori.Text;
-            bll.AddCategori(newdir);
+          
         }
 
         private void cbKategori_SelectedIndexChanged(object sender, EventArgs e)
@@ -168,6 +167,51 @@ namespace CsharpProjekt
         {
             
             
+        }
+
+        private void btSortera_Click(object sender, EventArgs e)
+        {
+            string kategori = cbKategori.Text;
+            bll.SorteraEfterKategori(kategori);
+            lwPodcast.Items.Clear();
+            FillPodcastListByKategori();
+            btAndraPod.Enabled = false;
+        }
+
+        private void FillPodcastListByKategori()
+        {
+            var podcastLista = bll.ConvertPodcastListToStringByKategori();
+
+            int i = 0;
+
+            foreach (var podcast in podcastLista)
+            {
+                int ind = 0;
+                while (ind < 4)
+                {
+                    ListViewItem item = new ListViewItem(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    lwPodcast.Items.Add(item);
+                    i++;
+                    ind++;
+                }
+
+            }
+        }
+
+        private void btReset_Click(object sender, EventArgs e)
+        {
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+            btAndraPod.Enabled = true;
         }
     }
 }

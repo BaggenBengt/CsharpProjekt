@@ -16,10 +16,11 @@ namespace Logic
     public class Bll
     {
         public List<Podcast> allaPodcasts { get; set; }
-
+        public List<Podcast> allaPodcastsSorterade { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
+            allaPodcastsSorterade = new List<Podcast>();
            
 
         }
@@ -92,18 +93,7 @@ namespace Logic
             return allPodcastsInString;
         }
 
-        public void AddCategori(string dir) { 
-         
-         var newdir = dir;
-            if (Directory.Exists(newdir))
-            {
-                
-            } else
-            {
-                Directory.CreateDirectory(newdir);
-            }
-        
-        }
+
 
         public void ChangeJsonData(string kategori, string frekvens, int index)
         {
@@ -118,5 +108,33 @@ namespace Logic
             dWr.DeleteJsonItem(podcastnamn);
 
         }
+        public void SorteraEfterKategori(string kategori)
+        {
+            var dWr = new DataWriteRead();
+            allaPodcastsSorterade = dWr.SorteraEfterKategori(kategori);
+        }
+
+        public List<List<string>> ConvertPodcastListToStringByKategori()
+        {
+            var allPodcastsInString = new List<List<string>>();
+            var podcastProperty = new List<string>();
+            foreach (Podcast podcast in allaPodcastsSorterade)
+            {
+                var kategori = podcast.Kategori;
+                var antalavsnitt = podcast.AntalAvsnitt.ToString();
+                var frekvens = podcast.Frekvens;
+                var name = podcast.Name;
+
+                podcastProperty.Add(name);
+                podcastProperty.Add(antalavsnitt);
+                podcastProperty.Add(frekvens);
+                podcastProperty.Add(kategori);
+
+                allPodcastsInString.Add(podcastProperty);
+
+            }
+            return allPodcastsInString;
+        }
+
     }
 }

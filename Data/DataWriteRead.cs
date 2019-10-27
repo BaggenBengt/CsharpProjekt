@@ -92,10 +92,28 @@ namespace Data
         public void DeleteJsonItem(String podcast)
         {
             string json = File.ReadAllText("sparadepodcasts.json");
-            var items = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Podcast>>(json);
+            var items = JsonConvert.DeserializeObject<List<Podcast>>(json);
 
             var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Name != podcast));
             File.WriteAllText("sparadepodcasts.json", newJsonString);
+
+        }
+
+        public List<Podcast> SorteraEfterKategori(string kategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
+            List<Podcast> podListSortedByKategori = new List<Podcast>();
+
+            foreach (Podcast p in podLista)
+            {
+                if (kategori == p.Kategori)
+                {
+                    
+                    podListSortedByKategori.Add(p);
+                }
+            }
+            return podListSortedByKategori;
 
         }
     }
