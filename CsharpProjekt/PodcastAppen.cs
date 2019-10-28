@@ -13,6 +13,7 @@ namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
+         
         public Bll bll { get; set; }
 
         public PodcastAppen()
@@ -90,6 +91,7 @@ namespace CsharpProjekt
             lwPodcast.Items.Clear();
             FillPodcastList(); }
 
+        
         private void lwPodcast_SelectedIndexChanged(object sender, EventArgs e)
         {
             
@@ -97,6 +99,7 @@ namespace CsharpProjekt
             if (selected.Count > 0)
             {
                 lwPodAvsnitt.Items.Clear();
+                tbAvsnittBeskrivning.Clear();
                 foreach (ListViewItem item in selected)
                 {
                     var namn = item.SubItems[0].Text;
@@ -107,9 +110,6 @@ namespace CsharpProjekt
                         ListViewItem item1 = new ListViewItem(avsnittTitle);
                         lwPodAvsnitt.Items.Add(item1);
                     }
-
-
-
                 }
             }
 
@@ -127,7 +127,110 @@ namespace CsharpProjekt
 
         private void btAndraPod_Click(object sender, EventArgs e)
         {
+            string kategori = cbKategori.Text;
+            string frekvens = cbFrekvens.Text;
+            int index = lwPodcast.SelectedIndices[0];
+            string namn = lwPodcast.Items[index].SubItems[0].Text;
+
+            bll.ChangeJsonData(kategori, frekvens, index);
+
+            bll.getSparadPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+
+
+        }
+
+        private void btNyKategori_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void cbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btTaBortPod_Click(object sender, EventArgs e)
+        {
+            int index = lwPodcast.SelectedIndices[0];
+            string namn = lwPodcast.Items[index].SubItems[0].Text;
+            bll.DeleteJsonItem(namn);
+            bll.getSparadPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+            lwPodAvsnitt.Items.Clear();
+        }
+
+        private void btTaBortKategori_Click(object sender, EventArgs e)
+        {
             
+            
+        }
+
+        private void btSortera_Click(object sender, EventArgs e)
+        {
+            string kategori = cbKategori.Text;
+            bll.SorteraEfterKategori(kategori);
+            lwPodcast.Items.Clear();
+            FillPodcastListByKategori();
+            btAndraPod.Enabled = false;
+        }
+
+        private void FillPodcastListByKategori()
+        {
+            var podcastLista = bll.ConvertPodcastListToStringByKategori();
+
+            int i = 0;
+
+            foreach (var podcast in podcastLista)
+            {
+                int ind = 0;
+                while (ind < 4)
+                {
+                    ListViewItem item = new ListViewItem(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    i++;
+                    ind++;
+                    item.SubItems.Add(podcast[i]);
+                    lwPodcast.Items.Add(item);
+                    i++;
+                    ind++;
+                }
+
+            }
+        }
+
+        private void btReset_Click(object sender, EventArgs e)
+        {
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+            btAndraPod.Enabled = true;
+        }
+
+        private void lwPodAvsnitt_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void lwPodAvsnitt_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            var selected = lwPodAvsnitt.SelectedItems;
+            if (selected.Count > 0)
+            {
+                tbAvsnittBeskrivning.Clear();
+                foreach (ListViewItem item in selected)
+                {
+                    var avsnittNamn = item.SubItems[0].Text;
+                    var avsnittBeskrivning = bll.getAvsnittBeskrivningByAvsnittName(avsnittNamn);
+                    tbAvsnittBeskrivning.Text = avsnittBeskrivning;
+                }
+            }
         }
     }
 }

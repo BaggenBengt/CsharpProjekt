@@ -75,5 +75,46 @@ namespace Data
             }
             
         }
+
+        public void ChangeJsonData(string kategori, string frekvens, int index)
+        {
+
+            string json = File.ReadAllText("sparadepodcasts.json");
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            jsonObj[index]["Kategori"] = kategori;
+            jsonObj[index]["Frekvens"] = frekvens;
+           
+            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText("sparadepodcasts.json", output);
+
+        }
+
+        public void DeleteJsonItem(String podcast)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            var items = JsonConvert.DeserializeObject<List<Podcast>>(json);
+
+            var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Name != podcast));
+            File.WriteAllText("sparadepodcasts.json", newJsonString);
+
+        }
+
+        public List<Podcast> SorteraEfterKategori(string kategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
+            List<Podcast> podListSortedByKategori = new List<Podcast>();
+
+            foreach (Podcast p in podLista)
+            {
+                if (kategori == p.Kategori)
+                {
+                    
+                    podListSortedByKategori.Add(p);
+                }
+            }
+            return podListSortedByKategori;
+
+        }
     }
 }

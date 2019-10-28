@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,11 @@ namespace Logic
     public class Bll
     {
         public List<Podcast> allaPodcasts { get; set; }
-
+        public List<Podcast> allaPodcastsSorterade { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
+            allaPodcastsSorterade = new List<Podcast>();
            
 
         }
@@ -44,8 +46,26 @@ namespace Logic
             return allaPodcasts
                                .Where(pod => pod.Name.Equals(name))
                                .ToList();
-
         }
+
+        public string getAvsnittBeskrivningByAvsnittName (string name)
+        {
+            string avsnittBeskrivning = "";
+            foreach (Podcast pod in allaPodcasts)
+            {
+                var avsnittlista = pod.AvsnittLista;
+                foreach (Avsnitt avsnitt in avsnittlista)
+                {
+                    if (avsnitt.Title.Equals(name))
+                    {
+                        avsnittBeskrivning = avsnitt.Beskrivning;
+                    }
+                }
+            }
+            return avsnittBeskrivning;                   
+                               
+        }
+
         public void nyPodcast(string url, string kategori, string frekvens)
         {
             Podcast nyPodcast = new Podcast(url, kategori, frekvens);
@@ -90,5 +110,49 @@ namespace Logic
             }
             return allPodcastsInString;
         }
+
+
+
+        public void ChangeJsonData(string kategori, string frekvens, int index)
+        {
+            var dWr = new DataWriteRead();
+            dWr.ChangeJsonData(kategori, frekvens, index);
+
+        }
+
+        public void DeleteJsonItem(string podcastnamn)
+        {
+            var dWr = new DataWriteRead();
+            dWr.DeleteJsonItem(podcastnamn);
+
+        }
+        public void SorteraEfterKategori(string kategori)
+        {
+            var dWr = new DataWriteRead();
+            allaPodcastsSorterade = dWr.SorteraEfterKategori(kategori);
+        }
+
+        public List<List<string>> ConvertPodcastListToStringByKategori()
+        {
+            var allPodcastsInString = new List<List<string>>();
+            var podcastProperty = new List<string>();
+            foreach (Podcast podcast in allaPodcastsSorterade)
+            {
+                var kategori = podcast.Kategori;
+                var antalavsnitt = podcast.AntalAvsnitt.ToString();
+                var frekvens = podcast.Frekvens;
+                var name = podcast.Name;
+
+                podcastProperty.Add(name);
+                podcastProperty.Add(antalavsnitt);
+                podcastProperty.Add(frekvens);
+                podcastProperty.Add(kategori);
+
+                allPodcastsInString.Add(podcastProperty);
+
+            }
+            return allPodcastsInString;
+        }
+
     }
 }

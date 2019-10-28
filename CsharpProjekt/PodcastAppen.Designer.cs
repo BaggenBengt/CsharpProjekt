@@ -54,6 +54,8 @@
             this.cbFrekvens = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btSortera = new System.Windows.Forms.Button();
+            this.btReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btNyPod
@@ -74,6 +76,7 @@
             this.btTaBortPod.TabIndex = 1;
             this.btTaBortPod.Text = "Ta bort";
             this.btTaBortPod.UseVisualStyleBackColor = true;
+            this.btTaBortPod.Click += new System.EventHandler(this.btTaBortPod_Click);
             // 
             // btAndraPod
             // 
@@ -102,6 +105,7 @@
             this.btTaBortKategori.TabIndex = 4;
             this.btTaBortKategori.Text = "Ta bort";
             this.btTaBortKategori.UseVisualStyleBackColor = true;
+            this.btTaBortKategori.Click += new System.EventHandler(this.btTaBortKategori_Click);
             // 
             // btNyKategori
             // 
@@ -111,6 +115,7 @@
             this.btNyKategori.TabIndex = 3;
             this.btNyKategori.Text = "Ny";
             this.btNyKategori.UseVisualStyleBackColor = true;
+            this.btNyKategori.Click += new System.EventHandler(this.btNyKategori_Click);
             // 
             // tbKategori
             // 
@@ -184,6 +189,8 @@
             this.lwPodAvsnitt.TabIndex = 10;
             this.lwPodAvsnitt.UseCompatibleStateImageBehavior = false;
             this.lwPodAvsnitt.View = System.Windows.Forms.View.Details;
+            this.lwPodAvsnitt.SelectedIndexChanged += new System.EventHandler(this.lwPodAvsnitt_SelectedIndexChanged_1);
+            this.lwPodAvsnitt.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lwPodAvsnitt_MouseClick);
             // 
             // PodcastAvsnitt
             // 
@@ -275,11 +282,14 @@
             this.cbKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbKategori.FormattingEnabled = true;
             this.cbKategori.Items.AddRange(new object[] {
-            "Skräck"});
+            "Skräck",
+            "Humor",
+            "Historia"});
             this.cbKategori.Location = new System.Drawing.Point(365, 231);
             this.cbKategori.Name = "cbKategori";
             this.cbKategori.Size = new System.Drawing.Size(95, 21);
             this.cbKategori.TabIndex = 19;
+            this.cbKategori.SelectedIndexChanged += new System.EventHandler(this.cbKategori_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -291,11 +301,35 @@
             this.label7.TabIndex = 20;
             this.label7.Text = "Avsnitt beskrivning";
             // 
+            // btSortera
+            // 
+            this.btSortera.Location = new System.Drawing.Point(475, 271);
+            this.btSortera.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSortera.Name = "btSortera";
+            this.btSortera.Size = new System.Drawing.Size(65, 23);
+            this.btSortera.TabIndex = 21;
+            this.btSortera.Text = "Sortera";
+            this.btSortera.UseVisualStyleBackColor = true;
+            this.btSortera.Click += new System.EventHandler(this.btSortera_Click);
+            // 
+            // btReset
+            // 
+            this.btReset.Location = new System.Drawing.Point(475, 231);
+            this.btReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(65, 23);
+            this.btReset.TabIndex = 22;
+            this.btReset.Text = "Återställ";
+            this.btReset.UseVisualStyleBackColor = true;
+            this.btReset.Click += new System.EventHandler(this.btReset_Click);
+            // 
             // PodcastAppen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 533);
+            this.Controls.Add(this.btReset);
+            this.Controls.Add(this.btSortera);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbKategori);
             this.Controls.Add(this.cbFrekvens);
@@ -353,6 +387,8 @@
         private System.Windows.Forms.ColumnHeader Frekvens;
         private System.Windows.Forms.ColumnHeader Kategori;
         private System.Windows.Forms.ColumnHeader PodcastAvsnitt;
+        private System.Windows.Forms.Button btSortera;
+        private System.Windows.Forms.Button btReset;
     }
 }
 
