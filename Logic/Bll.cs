@@ -35,7 +35,7 @@ namespace Logic
 
                 foreach (var avsnitt in allaAvsnitt)
                 {
-                    string avsnittTitle = avsnitt.Title.ToString();
+                    string avsnittTitle = avsnitt.Name.ToString();
                     allaAvsnittToString.Add(avsnittTitle);
                 }
             }
@@ -56,7 +56,7 @@ namespace Logic
                 var avsnittlista = pod.AvsnittLista;
                 foreach (Avsnitt avsnitt in avsnittlista)
                 {
-                    if (avsnitt.Title.Equals(name))
+                    if (avsnitt.Name.Equals(name))
                     {
                         avsnittBeskrivning = avsnitt.Beskrivning;
                     }
