@@ -17,11 +17,13 @@ namespace Logic
     {
         public List<Podcast> allaPodcasts { get; set; }
         public List<Podcast> allaPodcastsSorterade { get; set; }
+
+        public DataWriteRead dWR { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
             allaPodcastsSorterade = new List<Podcast>();
-           
+             dWR = new DataWriteRead();
 
         }
         public List<string> getPodcastAvsnittToString(string name)
@@ -79,13 +81,13 @@ namespace Logic
 
         public void sparaPodcastLista()
         {
-            var dWR = new DataWriteRead();
+            
             dWR.sparaPodcastListaTillJson(allaPodcasts);
         }
 
         public void getSparadPodcastLista()
         {
-            var dWR = new DataWriteRead();
+            
             allaPodcasts = dWR.getSparadPodcastListaFromJson();
         }
 
@@ -115,21 +117,21 @@ namespace Logic
 
         public void ChangeJsonData(string kategori, string frekvens, int index)
         {
-            var dWr = new DataWriteRead();
-            dWr.ChangeJsonData(kategori, frekvens, index);
+           
+            dWR.ChangeJsonData(kategori, frekvens, index);
 
         }
 
         public void DeleteJsonItem(string podcastnamn)
         {
-            var dWr = new DataWriteRead();
-            dWr.DeleteJsonItem(podcastnamn);
+            
+            dWR.DeleteJsonItem(podcastnamn);
 
         }
         public void SorteraEfterKategori(string kategori)
         {
-            var dWr = new DataWriteRead();
-            allaPodcastsSorterade = dWr.SorteraEfterKategori(kategori);
+            
+            allaPodcastsSorterade = dWR.SorteraEfterKategori(kategori);
         }
 
         public List<List<string>> ConvertPodcastListToStringByKategori()
