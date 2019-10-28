@@ -91,11 +91,22 @@ namespace Logic
             allaPodcasts = dWR.getSparadPodcastListaFromJson();
         }
 
-        public List<List<string>> ConvertPodcastListToString() 
+        public List<List<string>> ConvertPodcastListToString(string val) 
         {
+            var podcastlista = new List<Podcast>();
+            
+            switch(val){
+                case "HelaListan":
+                    podcastlista = allaPodcasts;
+                    break;
+                case "SorteradKategori":
+                    podcastlista = allaPodcastsSorterade;
+                    break;
+            }
             var allPodcastsInString = new List<List<string>>();
             var podcastProperty = new List<string>();
-            foreach (Podcast podcast in allaPodcasts)
+            
+            foreach (Podcast podcast in podcastlista)
             {
                 var kategori = podcast.Kategori;
                 var antalavsnitt = podcast.AntalAvsnitt.ToString();
@@ -131,30 +142,10 @@ namespace Logic
         public void SorteraEfterKategori(string kategori)
         {
             
-            allaPodcastsSorterade = dWR.SorteraEfterKategori(kategori);
+            allaPodcastsSorterade = dWR.getSparadPodcastListaFromJson(kategori);
         }
 
-        public List<List<string>> ConvertPodcastListToStringByKategori()
-        {
-            var allPodcastsInString = new List<List<string>>();
-            var podcastProperty = new List<string>();
-            foreach (Podcast podcast in allaPodcastsSorterade)
-            {
-                var kategori = podcast.Kategori;
-                var antalavsnitt = podcast.AntalAvsnitt.ToString();
-                var frekvens = podcast.Frekvens;
-                var name = podcast.Name;
-
-                podcastProperty.Add(name);
-                podcastProperty.Add(antalavsnitt);
-                podcastProperty.Add(frekvens);
-                podcastProperty.Add(kategori);
-
-                allPodcastsInString.Add(podcastProperty);
-
-            }
-            return allPodcastsInString;
-        }
+  
 
     }
 }

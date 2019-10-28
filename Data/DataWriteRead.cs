@@ -76,6 +76,26 @@ namespace Data
             
         }
 
+        public List<Podcast> getSparadPodcastListaFromJson(string kategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
+            List<Podcast> podListSortedByKategori = new List<Podcast>();
+
+
+
+            foreach (Podcast p in podLista)
+            {
+                if (kategori == p.Kategori)
+                {
+
+                    podListSortedByKategori.Add(p);
+                }
+            }
+            return podListSortedByKategori;
+
+        }
+
         public void ChangeJsonData(string kategori, string frekvens, int index)
         {
 
@@ -99,24 +119,6 @@ namespace Data
 
         }
 
-        public List<Podcast> SorteraEfterKategori(string kategori)
-        {
-            string json = File.ReadAllText("sparadepodcasts.json");
-            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
-            List<Podcast> podListSortedByKategori = new List<Podcast>();
-
-           
-
-            foreach (Podcast p in podLista)
-            {
-                if (kategori == p.Kategori)
-                {
-                    
-                    podListSortedByKategori.Add(p);
-                }
-            }
-            return podListSortedByKategori;
-
-        }
+      
     }
 }

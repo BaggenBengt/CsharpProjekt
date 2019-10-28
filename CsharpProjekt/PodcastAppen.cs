@@ -28,7 +28,7 @@ namespace CsharpProjekt
 
         private void FillPodcastList()
         {
-           var podcastLista = bll.ConvertPodcastListToString();
+           var podcastLista = bll.ConvertPodcastListToString("HelaListan");
 
             int i = 0;
             
@@ -179,7 +179,7 @@ namespace CsharpProjekt
 
         private void FillPodcastListByKategori()
         {
-            var podcastLista = bll.ConvertPodcastListToStringByKategori();
+            var podcastLista = bll.ConvertPodcastListToString("SorteradKategori");
 
             int i = 0;
 
