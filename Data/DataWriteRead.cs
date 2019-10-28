@@ -15,7 +15,7 @@ namespace Data
     public class DataWriteRead
     {
 
-        public void sparaPodcastListaTillJson(List<Podcast> podcastLista)
+        public void sparaTillJson(List<Podcast> podcastLista)
         {
             var Serializer = new JsonSerializer
             {
@@ -30,6 +30,23 @@ namespace Data
                         Serializer.Serialize(jtw, podcastLista);
 
                     }
+            }
+        }
+        public void sparaTillJson(List<Kategorier> kategorierLista)
+        {
+            var Serializer = new JsonSerializer
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (var sw = new StreamWriter("kategorier.Json"))
+            {
+                using (var jtw = new JsonTextWriter(sw))
+                {
+
+                    Serializer.Serialize(jtw, kategorierLista);
+
+                }
             }
         }
         public string getPodcastTitleFromUrl(string url)
@@ -118,7 +135,36 @@ namespace Data
             File.WriteAllText("sparadepodcasts.json", newJsonString);
 
         }
+        public void DeleteKategoriFromJson(String kategori)
+        {
+            string json = File.ReadAllText("kategorier.json");
+            var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
 
-      
+            var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Kategori != kategori));
+            File.WriteAllText("kategorier.json", newJsonString);
+
+
+        }
+
+        public List<Kategorier> getKategorierFromJson()
+        {
+            var serializer = new JsonSerializer
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (var sr = new StreamReader("kategorier.Json"))
+            {
+                using (var jtr = new JsonTextReader(sr))
+                {
+                    List<Kategorier> kategorierLista = serializer.Deserialize<List<Kategorier>>(jtr);
+                    return kategorierLista;
+                }
+
+            }
+
+        }
+
+
     }
 }

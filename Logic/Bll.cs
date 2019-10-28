@@ -18,11 +18,14 @@ namespace Logic
         public List<Podcast> allaPodcasts { get; set; }
         public List<Podcast> allaPodcastsSorterade { get; set; }
 
+        public List<Kategorier> allaKategorier { get; set; }
+
         public DataWriteRead dWR { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
             allaPodcastsSorterade = new List<Podcast>();
+            allaKategorier = new List<Kategorier>();    
              dWR = new DataWriteRead();
 
         }
@@ -79,16 +82,39 @@ namespace Logic
             allaPodcasts.Add(nyPodcast);
         }
 
+        public void nyKategori(string kategori)
+        {
+            Kategorier nyKategori = new Kategorier(kategori);
+            addNyKategoriToList(nyKategori);
+        }
+
+        private void addNyKategoriToList(Kategorier nyKategori)
+        {
+            allaKategorier.Add(nyKategori);
+
+        }
+
         public void sparaPodcastLista()
         {
             
-            dWR.sparaPodcastListaTillJson(allaPodcasts);
+            dWR.sparaTillJson(allaPodcasts);
+        }
+
+        public void sparaKategorierLista()
+        {
+            dWR.sparaTillJson(allaKategorier);
+
         }
 
         public void getSparadPodcastLista()
         {
             
             allaPodcasts = dWR.getSparadPodcastListaFromJson();
+        }
+        public void getSparadKategorierLista()
+        {
+            allaKategorier = dWR.getKategorierFromJson();
+
         }
 
         public List<List<string>> ConvertPodcastListToString(string val) 
@@ -123,6 +149,26 @@ namespace Logic
             }
             return allPodcastsInString;
         }
+        public List<string> ConvertKategorierListToString()
+        {
+            
+
+        
+            
+            var kategoriNamnList = new List<string>();
+
+            foreach (Kategorier kategori in allaKategorier)
+            {
+                var namnkategori = kategori.Kategori;
+
+                kategoriNamnList.Add(namnkategori);
+       
+
+               
+
+            }
+            return kategoriNamnList;
+        }
 
 
 
@@ -139,13 +185,24 @@ namespace Logic
             dWR.DeleteJsonItem(podcastnamn);
 
         }
+
+        public void DeleteKategoriFromJson(string kategori)
+        {
+            dWR.DeleteKategoriFromJson(kategori);
+
+        }
         public void SorteraEfterKategori(string kategori)
         {
             
             allaPodcastsSorterade = dWR.getSparadPodcastListaFromJson(kategori);
         }
 
-  
+        public void ChangeKategori(string kategori)
+        {
+
+
+
+        }
 
     }
 }
