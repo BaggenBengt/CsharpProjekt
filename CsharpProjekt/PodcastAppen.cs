@@ -77,14 +77,8 @@ namespace CsharpProjekt
         }
         private void fyllcbKategori(List<string> kategoriLista)
         {
-            foreach (var kategori in kategoriLista)
-            {
-
-                cbKategori.Items.Add(kategori);
-            }
-
-
-
+        
+            cbKategori.DataSource = kategoriLista;
         }
 
         //private void FillAvsnittList(List<string> avsnittList)
@@ -163,7 +157,6 @@ namespace CsharpProjekt
             string kategori = cbKategori.Text;
             string frekvens = cbFrekvens.Text;
             int index = lwPodcast.SelectedIndices[0];
-            string namn = lwPodcast.Items[index].SubItems[0].Text;
 
             bll.ChangeJsonData(kategori, frekvens, index);
 
@@ -180,7 +173,7 @@ namespace CsharpProjekt
             bll.nyKategori(kategori);
             bll.sparaKategorierLista();
             lwKategori.Items.Clear();
-            cbKategori.Items.Clear();
+            cbKategori.DataSource = null;
             FillKategoriList();
         }
 
@@ -207,7 +200,7 @@ namespace CsharpProjekt
             bll.DeleteKategoriFromJson(kategorinamn);
             bll.getSparadKategorierLista();
             lwKategori.Items.Clear();
-            cbKategori.Items.Clear();
+            cbKategori.DataSource = null;
             FillKategoriList();
             tbKategori.Clear();
             
@@ -299,7 +292,7 @@ namespace CsharpProjekt
             bll.ChangeKategori(nykategori, index, oldkategori);
             bll.getSparadKategorierLista();
             lwKategori.Items.Clear();
-            cbKategori.Items.Clear();
+            cbKategori.DataSource = null;
             FillKategoriList();
             bll.sparaPodcastLista();
             lwPodcast.Items.Clear();
