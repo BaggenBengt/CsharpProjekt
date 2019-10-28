@@ -46,8 +46,26 @@ namespace Logic
             return allaPodcasts
                                .Where(pod => pod.Name.Equals(name))
                                .ToList();
-
         }
+
+        public string getAvsnittBeskrivningByAvsnittName (string name)
+        {
+            string avsnittBeskrivning = "";
+            foreach (Podcast pod in allaPodcasts)
+            {
+                var avsnittlista = pod.AvsnittLista;
+                foreach (Avsnitt avsnitt in avsnittlista)
+                {
+                    if (avsnitt.Title.Equals(name))
+                    {
+                        avsnittBeskrivning = avsnitt.Beskrivning;
+                    }
+                }
+            }
+            return avsnittBeskrivning;                   
+                               
+        }
+
         public void nyPodcast(string url, string kategori, string frekvens)
         {
             Podcast nyPodcast = new Podcast(url, kategori, frekvens);

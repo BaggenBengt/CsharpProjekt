@@ -91,6 +91,7 @@ namespace CsharpProjekt
             lwPodcast.Items.Clear();
             FillPodcastList(); }
 
+        
         private void lwPodcast_SelectedIndexChanged(object sender, EventArgs e)
         {
             
@@ -98,6 +99,7 @@ namespace CsharpProjekt
             if (selected.Count > 0)
             {
                 lwPodAvsnitt.Items.Clear();
+                tbAvsnittBeskrivning.Clear();
                 foreach (ListViewItem item in selected)
                 {
                     var namn = item.SubItems[0].Text;
@@ -108,9 +110,6 @@ namespace CsharpProjekt
                         ListViewItem item1 = new ListViewItem(avsnittTitle);
                         lwPodAvsnitt.Items.Add(item1);
                     }
-
-
-
                 }
             }
 
@@ -212,6 +211,26 @@ namespace CsharpProjekt
             lwPodcast.Items.Clear();
             FillPodcastList();
             btAndraPod.Enabled = true;
+        }
+
+        private void lwPodAvsnitt_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void lwPodAvsnitt_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            var selected = lwPodAvsnitt.SelectedItems;
+            if (selected.Count > 0)
+            {
+                tbAvsnittBeskrivning.Clear();
+                foreach (ListViewItem item in selected)
+                {
+                    var avsnittNamn = item.SubItems[0].Text;
+                    var avsnittBeskrivning = bll.getAvsnittBeskrivningByAvsnittName(avsnittNamn);
+                    tbAvsnittBeskrivning.Text = avsnittBeskrivning;
+                }
+            }
         }
     }
 }
