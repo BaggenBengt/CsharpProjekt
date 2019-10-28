@@ -116,6 +116,7 @@ namespace Logic
             allaKategorier = dWR.getKategorierFromJson();
 
         }
+      
 
         public List<List<string>> ConvertPodcastListToString(string val) 
         {
@@ -197,9 +198,9 @@ namespace Logic
             allaPodcastsSorterade = dWR.getSparadPodcastListaFromJson(kategori);
         }
 
-        public void ChangeKategori(string kategori)
+        public void ChangeKategori(string nykategori, int index, string oldkategori)
         {
-
+           allaPodcasts = dWR.ChangeJsonDataKategori(nykategori, index, oldkategori);
 
 
         }

@@ -293,8 +293,20 @@ namespace CsharpProjekt
 
         private void btAndraKatagori_Click(object sender, EventArgs e)
         {
-            string kategori = tbKategori.Text;
-            bll.ChangeKategori(kategori);
-        }
+            string nykategori = tbKategori.Text;
+            int index = lwKategori.SelectedIndices[0];
+            string oldkategori = lwKategori.Items[index].SubItems[0].Text;
+            bll.ChangeKategori(nykategori, index, oldkategori);
+            bll.getSparadKategorierLista();
+            lwKategori.Items.Clear();
+            cbKategori.Items.Clear();
+            FillKategoriList();
+            bll.sparaPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+        
+
+
+    }
     }
 }

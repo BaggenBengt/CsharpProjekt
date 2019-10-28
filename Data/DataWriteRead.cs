@@ -125,6 +125,39 @@ namespace Data
             File.WriteAllText("sparadepodcasts.json", output);
 
         }
+   
+        public List<Podcast> ChangeJsonDataKategori(string nykategori, int index, string oldkategori)
+        {
+
+            string json = File.ReadAllText("kategorier.json");
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            jsonObj[index]["Kategori"] = nykategori;
+            
+
+            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText("kategorier.json", output);
+            List<Podcast> podlista = UpdatePodcastsNyKategori(nykategori, oldkategori);
+            return podlista;
+        }
+        private List<Podcast> UpdatePodcastsNyKategori(string nykategori, string oldkategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            var items = JsonConvert.DeserializeObject<List<Podcast>>(json);
+
+            foreach(Podcast pod in items)
+            {
+                if(pod.Kategori == oldkategori)
+                {
+                    pod.Kategori = nykategori;
+                    
+                }
+
+            }
+            
+            var newJsonString = JsonConvert.SerializeObject(items);
+            File.WriteAllText("sparadepodcasts.json", newJsonString);
+            return items;
+        }
 
         public void DeleteJsonItem(String podcast)
         {
