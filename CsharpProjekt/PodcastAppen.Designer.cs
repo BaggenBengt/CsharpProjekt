@@ -60,9 +60,10 @@
             // 
             // btNyPod
             // 
-            this.btNyPod.Location = new System.Drawing.Point(204, 271);
+            this.btNyPod.Location = new System.Drawing.Point(272, 334);
+            this.btNyPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btNyPod.Name = "btNyPod";
-            this.btNyPod.Size = new System.Drawing.Size(75, 23);
+            this.btNyPod.Size = new System.Drawing.Size(100, 28);
             this.btNyPod.TabIndex = 0;
             this.btNyPod.Text = "Ny";
             this.btNyPod.UseVisualStyleBackColor = true;
@@ -70,9 +71,10 @@
             // 
             // btTaBortPod
             // 
-            this.btTaBortPod.Location = new System.Drawing.Point(295, 271);
+            this.btTaBortPod.Location = new System.Drawing.Point(393, 334);
+            this.btTaBortPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btTaBortPod.Name = "btTaBortPod";
-            this.btTaBortPod.Size = new System.Drawing.Size(75, 23);
+            this.btTaBortPod.Size = new System.Drawing.Size(100, 28);
             this.btTaBortPod.TabIndex = 1;
             this.btTaBortPod.Text = "Ta bort";
             this.btTaBortPod.UseVisualStyleBackColor = true;
@@ -80,9 +82,10 @@
             // 
             // btAndraPod
             // 
-            this.btAndraPod.Location = new System.Drawing.Point(385, 271);
+            this.btAndraPod.Location = new System.Drawing.Point(513, 334);
+            this.btAndraPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btAndraPod.Name = "btAndraPod";
-            this.btAndraPod.Size = new System.Drawing.Size(75, 23);
+            this.btAndraPod.Size = new System.Drawing.Size(100, 28);
             this.btAndraPod.TabIndex = 2;
             this.btAndraPod.Text = "Ändra";
             this.btAndraPod.UseVisualStyleBackColor = true;
@@ -90,18 +93,20 @@
             // 
             // btAndraKatagori
             // 
-            this.btAndraKatagori.Location = new System.Drawing.Point(775, 271);
+            this.btAndraKatagori.Location = new System.Drawing.Point(1033, 334);
+            this.btAndraKatagori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btAndraKatagori.Name = "btAndraKatagori";
-            this.btAndraKatagori.Size = new System.Drawing.Size(75, 23);
+            this.btAndraKatagori.Size = new System.Drawing.Size(100, 28);
             this.btAndraKatagori.TabIndex = 5;
             this.btAndraKatagori.Text = "Ändra";
             this.btAndraKatagori.UseVisualStyleBackColor = true;
             // 
             // btTaBortKategori
             // 
-            this.btTaBortKategori.Location = new System.Drawing.Point(685, 271);
+            this.btTaBortKategori.Location = new System.Drawing.Point(913, 334);
+            this.btTaBortKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btTaBortKategori.Name = "btTaBortKategori";
-            this.btTaBortKategori.Size = new System.Drawing.Size(75, 23);
+            this.btTaBortKategori.Size = new System.Drawing.Size(100, 28);
             this.btTaBortKategori.TabIndex = 4;
             this.btTaBortKategori.Text = "Ta bort";
             this.btTaBortKategori.UseVisualStyleBackColor = true;
@@ -109,9 +114,10 @@
             // 
             // btNyKategori
             // 
-            this.btNyKategori.Location = new System.Drawing.Point(594, 271);
+            this.btNyKategori.Location = new System.Drawing.Point(792, 334);
+            this.btNyKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btNyKategori.Name = "btNyKategori";
-            this.btNyKategori.Size = new System.Drawing.Size(75, 23);
+            this.btNyKategori.Size = new System.Drawing.Size(100, 28);
             this.btNyKategori.TabIndex = 3;
             this.btNyKategori.Text = "Ny";
             this.btNyKategori.UseVisualStyleBackColor = true;
@@ -119,25 +125,28 @@
             // 
             // tbKategori
             // 
-            this.tbKategori.Location = new System.Drawing.Point(566, 231);
+            this.tbKategori.Location = new System.Drawing.Point(755, 284);
+            this.tbKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbKategori.Name = "tbKategori";
-            this.tbKategori.Size = new System.Drawing.Size(297, 20);
+            this.tbKategori.Size = new System.Drawing.Size(395, 22);
             this.tbKategori.TabIndex = 6;
             // 
             // tbUrlPod
             // 
-            this.tbUrlPod.Location = new System.Drawing.Point(30, 231);
+            this.tbUrlPod.Location = new System.Drawing.Point(40, 284);
+            this.tbUrlPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbUrlPod.Name = "tbUrlPod";
-            this.tbUrlPod.Size = new System.Drawing.Size(196, 20);
+            this.tbUrlPod.Size = new System.Drawing.Size(260, 22);
             this.tbUrlPod.TabIndex = 7;
             this.tbUrlPod.TextChanged += new System.EventHandler(this.tbUrlPod_TextChanged);
             // 
             // lwKategori
             // 
             this.lwKategori.HideSelection = false;
-            this.lwKategori.Location = new System.Drawing.Point(566, 29);
+            this.lwKategori.Location = new System.Drawing.Point(755, 36);
+            this.lwKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lwKategori.Name = "lwKategori";
-            this.lwKategori.Size = new System.Drawing.Size(297, 162);
+            this.lwKategori.Size = new System.Drawing.Size(395, 198);
             this.lwKategori.TabIndex = 8;
             this.lwKategori.UseCompatibleStateImageBehavior = false;
             this.lwKategori.View = System.Windows.Forms.View.Details;
@@ -150,9 +159,10 @@
             this.Frekvens,
             this.Kategori});
             this.lwPodcast.HideSelection = false;
-            this.lwPodcast.Location = new System.Drawing.Point(30, 29);
+            this.lwPodcast.Location = new System.Drawing.Point(39, 36);
+            this.lwPodcast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lwPodcast.Name = "lwPodcast";
-            this.lwPodcast.Size = new System.Drawing.Size(430, 162);
+            this.lwPodcast.Size = new System.Drawing.Size(572, 198);
             this.lwPodcast.TabIndex = 9;
             this.lwPodcast.UseCompatibleStateImageBehavior = false;
             this.lwPodcast.View = System.Windows.Forms.View.Details;
@@ -183,9 +193,10 @@
             this.lwPodAvsnitt.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.PodcastAvsnitt});
             this.lwPodAvsnitt.HideSelection = false;
-            this.lwPodAvsnitt.Location = new System.Drawing.Point(30, 324);
+            this.lwPodAvsnitt.Location = new System.Drawing.Point(40, 399);
+            this.lwPodAvsnitt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lwPodAvsnitt.Name = "lwPodAvsnitt";
-            this.lwPodAvsnitt.Size = new System.Drawing.Size(430, 176);
+            this.lwPodAvsnitt.Size = new System.Drawing.Size(572, 216);
             this.lwPodAvsnitt.TabIndex = 10;
             this.lwPodAvsnitt.UseCompatibleStateImageBehavior = false;
             this.lwPodAvsnitt.View = System.Windows.Forms.View.Details;
@@ -199,19 +210,21 @@
             // 
             // tbAvsnittBeskrivning
             // 
-            this.tbAvsnittBeskrivning.Location = new System.Drawing.Point(566, 324);
+            this.tbAvsnittBeskrivning.Location = new System.Drawing.Point(755, 399);
+            this.tbAvsnittBeskrivning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbAvsnittBeskrivning.Multiline = true;
             this.tbAvsnittBeskrivning.Name = "tbAvsnittBeskrivning";
-            this.tbAvsnittBeskrivning.Size = new System.Drawing.Size(297, 176);
+            this.tbAvsnittBeskrivning.Size = new System.Drawing.Size(395, 216);
             this.tbAvsnittBeskrivning.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(566, 10);
+            this.label1.Location = new System.Drawing.Point(755, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.Size = new System.Drawing.Size(69, 17);
             this.label1.TabIndex = 12;
             this.label1.Text = "Kategori";
             // 
@@ -219,9 +232,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(27, 213);
+            this.label2.Location = new System.Drawing.Point(36, 262);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 15);
+            this.label2.Size = new System.Drawing.Size(42, 18);
             this.label2.TabIndex = 13;
             this.label2.Text = "URL:";
             // 
@@ -229,9 +243,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(566, 213);
+            this.label3.Location = new System.Drawing.Point(755, 262);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 15);
+            this.label3.Size = new System.Drawing.Size(102, 18);
             this.label3.TabIndex = 14;
             this.label3.Text = "Ange kategori:";
             // 
@@ -239,9 +254,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(27, 306);
+            this.label4.Location = new System.Drawing.Point(36, 377);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 15);
+            this.label4.Size = new System.Drawing.Size(109, 18);
             this.label4.TabIndex = 15;
             this.label4.Text = "Podcast avsnitt";
             // 
@@ -249,9 +265,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(230, 213);
+            this.label5.Location = new System.Drawing.Point(307, 262);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 15);
+            this.label5.Size = new System.Drawing.Size(155, 18);
             this.label5.TabIndex = 16;
             this.label5.Text = "Uppdateringsfrekvens:";
             // 
@@ -259,9 +276,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(362, 213);
+            this.label6.Location = new System.Drawing.Point(483, 262);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 15);
+            this.label6.Size = new System.Drawing.Size(67, 18);
             this.label6.TabIndex = 17;
             this.label6.Text = "Kategori:";
             // 
@@ -272,10 +290,12 @@
             this.cbFrekvens.Items.AddRange(new object[] {
             "Var 5:e minut",
             "Var 20:e minut"});
-            this.cbFrekvens.Location = new System.Drawing.Point(233, 231);
+            this.cbFrekvens.Location = new System.Drawing.Point(311, 284);
+            this.cbFrekvens.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbFrekvens.Name = "cbFrekvens";
-            this.cbFrekvens.Size = new System.Drawing.Size(126, 21);
+            this.cbFrekvens.Size = new System.Drawing.Size(167, 24);
             this.cbFrekvens.TabIndex = 18;
+            this.cbFrekvens.SelectedIndexChanged += new System.EventHandler(this.cbFrekvens_SelectedIndexChanged);
             // 
             // cbKategori
             // 
@@ -285,9 +305,10 @@
             "Skräck",
             "Humor",
             "Historia"});
-            this.cbKategori.Location = new System.Drawing.Point(365, 231);
+            this.cbKategori.Location = new System.Drawing.Point(487, 284);
+            this.cbKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbKategori.Name = "cbKategori";
-            this.cbKategori.Size = new System.Drawing.Size(95, 21);
+            this.cbKategori.Size = new System.Drawing.Size(125, 24);
             this.cbKategori.TabIndex = 19;
             this.cbKategori.SelectedIndexChanged += new System.EventHandler(this.cbKategori_SelectedIndexChanged);
             // 
@@ -295,18 +316,19 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(563, 306);
+            this.label7.Location = new System.Drawing.Point(751, 377);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 15);
+            this.label7.Size = new System.Drawing.Size(129, 18);
             this.label7.TabIndex = 20;
             this.label7.Text = "Avsnitt beskrivning";
             // 
             // btSortera
             // 
-            this.btSortera.Location = new System.Drawing.Point(475, 271);
-            this.btSortera.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSortera.Location = new System.Drawing.Point(633, 334);
+            this.btSortera.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSortera.Name = "btSortera";
-            this.btSortera.Size = new System.Drawing.Size(65, 23);
+            this.btSortera.Size = new System.Drawing.Size(87, 28);
             this.btSortera.TabIndex = 21;
             this.btSortera.Text = "Sortera";
             this.btSortera.UseVisualStyleBackColor = true;
@@ -314,10 +336,10 @@
             // 
             // btReset
             // 
-            this.btReset.Location = new System.Drawing.Point(475, 231);
-            this.btReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btReset.Location = new System.Drawing.Point(633, 284);
+            this.btReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btReset.Name = "btReset";
-            this.btReset.Size = new System.Drawing.Size(65, 23);
+            this.btReset.Size = new System.Drawing.Size(87, 28);
             this.btReset.TabIndex = 22;
             this.btReset.Text = "Återställ";
             this.btReset.UseVisualStyleBackColor = true;
@@ -325,9 +347,9 @@
             // 
             // PodcastAppen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 533);
+            this.ClientSize = new System.Drawing.Size(1183, 656);
             this.Controls.Add(this.btReset);
             this.Controls.Add(this.btSortera);
             this.Controls.Add(this.label7);
@@ -351,6 +373,7 @@
             this.Controls.Add(this.btAndraPod);
             this.Controls.Add(this.btTaBortPod);
             this.Controls.Add(this.btNyPod);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PodcastAppen";
             this.Text = "Podcast";
             this.Load += new System.EventHandler(this.PodcastAppen_Load);

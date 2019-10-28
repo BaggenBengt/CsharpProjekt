@@ -19,11 +19,11 @@ namespace CsharpProjekt
         public PodcastAppen()
         {
             InitializeComponent();
-            LoadForm();
+            
             bll = new Bll();
+            LoadForm();
             bll.getSparadPodcastLista();
             FillPodcastList();
-
         }
 
         private void FillPodcastList()
@@ -71,12 +71,14 @@ namespace CsharpProjekt
         //    tbAvsnittBeskrivning.Clear();
         //    tbAvsnittBeskrivning.Text = avsnitt.Beskrivning;
         //}
-        private void LoadForm()
+        private async Task LoadForm()
         {
             this.cbFrekvens.SelectedIndex = 0;
             this.cbKategori.SelectedIndex = 0;
             this.tbAvsnittBeskrivning.ReadOnly = true;
             lwPodcast.FullRowSelect = true;
+            await bll.startTimer("Var 5:e minut");
+            await bll.startTimer("Var 20:e minut");
         }
 
 
@@ -114,6 +116,8 @@ namespace CsharpProjekt
             }
 
         }
+      
+
 
         private void tbUrlPod_TextChanged(object sender, EventArgs e)
         {
@@ -232,5 +236,12 @@ namespace CsharpProjekt
                 }
             }
         }
+
+        private void cbFrekvens_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

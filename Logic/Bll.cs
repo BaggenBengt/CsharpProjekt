@@ -18,14 +18,17 @@ namespace Logic
         public List<Podcast> allaPodcasts { get; set; }
         public List<Podcast> allaPodcastsSorterade { get; set; }
 
+
         public DataWriteRead dWR { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
             allaPodcastsSorterade = new List<Podcast>();
-             dWR = new DataWriteRead();
-
+             dWR = new DataWriteRead(); 
         }
+
+
+
         public List<string> getPodcastAvsnittToString(string name)
         {
             List<string> allaAvsnittToString = new List<string>();
@@ -128,7 +131,7 @@ namespace Logic
             dWR.DeleteJsonItem(podcastnamn);
 
         }
-        public void SorteraEfterKategori(string kategori)
+        public  void SorteraEfterKategori(string kategori)
         {
             
             allaPodcastsSorterade = dWR.SorteraEfterKategori(kategori);
@@ -154,6 +157,18 @@ namespace Logic
 
             }
             return allPodcastsInString;
+        }
+       
+        public List<Podcast> getPodcastListByFrekvens(string frekvens)
+        {
+
+            return allaPodcasts.Where((pod) => pod.Frekvens.Equals(frekvens))
+                .ToList();
+        }
+        public async Task startTimer(string frekvens)
+        {
+            
+            allaPodcasts = await Task.Run(() => UpdateService.getUpdatedListByTimer(frekvens));
         }
 
     }

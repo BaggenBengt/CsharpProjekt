@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Data.Models;
 
 namespace Data
@@ -32,11 +33,16 @@ namespace Data
             Name = dWR.getPodcastTitleFromUrl(url);
 
             AntalAvsnitt = getAntalAvsnitt();
+
         }
 
         private int getAntalAvsnitt()
         {
             return AvsnittLista.Count();
         }
+
+     
     }
+
+
 }
