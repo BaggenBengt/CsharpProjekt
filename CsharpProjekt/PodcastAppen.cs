@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 using Logic;
 
 namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
-         
+
         public Bll bll { get; set; }
         
 
@@ -25,9 +26,36 @@ namespace CsharpProjekt
             bll.getSparadPodcastLista();
            bll.getSparadKategorierLista();
            FillKategoriList();
-            FillPodcastList();
+           
             
+            bll.StartaTimer();
+            FillPodcastList();
+            startaUpdateAvGuiAsync();
 
+        }
+        public async Task startaUpdateAvGuiAsync()
+        {
+            Task task1 = Task.Run(() => startaUpdateAvGui());
+            await task1;
+        }
+        public void startaUpdateAvGui()
+        {
+            System.Timers.Timer timer = new System.Timers.Timer(5000);
+            timer.Start();
+            timer.AutoReset = true;
+            timer.Elapsed += Timer_Elapsed;
+        }
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (lwPodcast.InvokeRequired)
+            {
+                lwPodcast.Invoke((MethodInvoker) delegate
+                {
+                    lwPodcast.Items.Clear();
+                    FillPodcastList();
+                });
+            }
+           
         }
 
         private void FillPodcastList()
@@ -106,8 +134,10 @@ namespace CsharpProjekt
             this.tbAvsnittBeskrivning.ReadOnly = true;
             lwPodcast.FullRowSelect = true;
             
+
         }
 
+        
 
         private void btNyPod_Click(object sender, EventArgs e)
         {
@@ -144,6 +174,8 @@ namespace CsharpProjekt
             }
 
         }
+      
+
 
         private void tbUrlPod_TextChanged(object sender, EventArgs e)
         {
@@ -313,5 +345,15 @@ namespace CsharpProjekt
 
 
     }
+        private void cbFrekvens_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PodcastAppen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bll.sparaPodcastLista();
+        }
     }
+
 }

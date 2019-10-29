@@ -12,4 +12,6 @@ namespace Data
         public string Beskrivning {get; set; }
         public string Name { get; set; }
     }
+
+
 }

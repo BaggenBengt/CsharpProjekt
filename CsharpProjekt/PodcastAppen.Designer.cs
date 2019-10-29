@@ -305,6 +305,7 @@
             this.cbFrekvens.Name = "cbFrekvens";
             this.cbFrekvens.Size = new System.Drawing.Size(187, 28);
             this.cbFrekvens.TabIndex = 18;
+            this.cbFrekvens.SelectedIndexChanged += new System.EventHandler(this.cbFrekvens_SelectedIndexChanged);
             // 
             // cbKategori
             // 
@@ -379,6 +380,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PodcastAppen";
             this.Text = "Podcast";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PodcastAppen_FormClosing);
             this.Load += new System.EventHandler(this.PodcastAppen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

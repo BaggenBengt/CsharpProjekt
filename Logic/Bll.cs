@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Xml;
 using Data;
 using Data.Models;
@@ -29,6 +30,7 @@ namespace Logic
              dWR = new DataWriteRead();
 
         }
+
         public List<string> getPodcastAvsnittToString(string name)
         {
             List<string> allaAvsnittToString = new List<string>();
@@ -207,6 +209,7 @@ namespace Logic
 
         }
         public void SorteraEfterKategori(string kategori)
+       
         {
             
             allaPodcastsSorterade = dWR.getSparadPodcastListaFromJson(kategori);
@@ -223,6 +226,23 @@ namespace Logic
             dWR.CreateJsonFile();
 
         }
+       
+        public List<Podcast> getPodcastListByFrekvens(string frekvens)
+        {
 
+            return allaPodcasts.Where((pod) => pod.Frekvens.Equals(frekvens))
+                .ToList();
+        }
+        
+
+        public void StartaTimer()
+        {
+            foreach (var pod in allaPodcasts)
+            {
+                pod.startaTimer(pod.Frekvens);
+            }
+        }
+
+      
     }
 }

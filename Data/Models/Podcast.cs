@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using Data.Models;
 
 namespace Data
@@ -16,6 +17,9 @@ namespace Data
         public List<Avsnitt> AvsnittLista { get; set; }
         public int AntalAvsnitt { get; set; }
 
+        public Timer timer { get; set; }
+
+      
         public Podcast()
         {
 
@@ -32,11 +36,46 @@ namespace Data
             Name = dWR.getPodcastTitleFromUrl(url);
 
             AntalAvsnitt = getAntalInList();
+           
+
+            startaTimer(Frekvens);
+        }
+
+        public void startaTimer(string frekvens)
+        {
+            if (frekvens.Equals("Var 5:e minut"))
+            {
+                timer = new Timer(300000);
+                timer.AutoReset = true;
+                timer.Start();          
+                timer.Elapsed += Timer_Elapsed;
+                
+            }
+            else if (frekvens.Equals("Var 20:e minut"))
+            {
+                timer = new Timer(1200000);
+                timer.AutoReset = true;
+                timer.Start();
+                timer.Elapsed += Timer_Elapsed;
+                
+            }
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            
+            DataWriteRead dwr = new DataWriteRead();
+            AvsnittLista =  dwr.getAvsnittFromUrl(Url);
+            AntalAvsnitt = getAntalInList();
         }
 
         protected override int getAntalInList()
         {
             return AvsnittLista.Count();
         }
+
+
     }
+
+
 }
