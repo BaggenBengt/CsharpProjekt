@@ -7,23 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 using Logic;
 
 namespace CsharpProjekt
 {
     public partial class PodcastAppen : Form
     {
-         
+
         public Bll bll { get; set; }
 
         public PodcastAppen()
         {
             InitializeComponent();
-            
             bll = new Bll();
             LoadForm();
             bll.getSparadPodcastLista();
+            bll.StartaTimer();
             FillPodcastList();
+            startaUpdateAvGuiAsync();
+
+        }
+        public async Task startaUpdateAvGuiAsync()
+        {
+            Task task1 = Task.Run(() => startaUpdateAvGui());
+            await task1;
+        }
+        public void startaUpdateAvGui()
+        {
+            System.Timers.Timer timer = new System.Timers.Timer(5000);
+            timer.Start();
+            timer.AutoReset = true;
+            timer.Elapsed += Timer_Elapsed;
+        }
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (lwPodcast.InvokeRequired)
+            {
+                lwPodcast.Invoke((MethodInvoker) delegate
+                {
+                    lwPodcast.Items.Clear();
+                    FillPodcastList();
+                });
+            }
+           
         }
 
         private void FillPodcastList()
@@ -71,16 +98,16 @@ namespace CsharpProjekt
         //    tbAvsnittBeskrivning.Clear();
         //    tbAvsnittBeskrivning.Text = avsnitt.Beskrivning;
         //}
-        private async Task LoadForm()
+        private void LoadForm()
         {
             this.cbFrekvens.SelectedIndex = 0;
             this.cbKategori.SelectedIndex = 0;
             this.tbAvsnittBeskrivning.ReadOnly = true;
             lwPodcast.FullRowSelect = true;
-            await bll.startTimer("Var 5:e minut");
-            await bll.startTimer("Var 20:e minut");
+
         }
 
+        
 
         private void btNyPod_Click(object sender, EventArgs e)
         {
@@ -242,6 +269,10 @@ namespace CsharpProjekt
 
         }
 
-        
+        private void PodcastAppen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bll.sparaPodcastLista();
+        }
     }
+
 }

@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Xml;
 using Data;
 using Data.Models;
@@ -17,8 +18,6 @@ namespace Logic
     {
         public List<Podcast> allaPodcasts { get; set; }
         public List<Podcast> allaPodcastsSorterade { get; set; }
-
-
         public DataWriteRead dWR { get; set; }
         public Bll()
         {
@@ -26,8 +25,6 @@ namespace Logic
             allaPodcastsSorterade = new List<Podcast>();
              dWR = new DataWriteRead(); 
         }
-
-
 
         public List<string> getPodcastAvsnittToString(string name)
         {
@@ -165,11 +162,16 @@ namespace Logic
             return allaPodcasts.Where((pod) => pod.Frekvens.Equals(frekvens))
                 .ToList();
         }
-        public async Task startTimer(string frekvens)
+        
+
+        public void StartaTimer()
         {
-            
-            allaPodcasts = await Task.Run(() => UpdateService.getUpdatedListByTimer(frekvens));
+            foreach (var pod in allaPodcasts)
+            {
+                pod.startaTimer(pod.Frekvens);
+            }
         }
 
+      
     }
 }

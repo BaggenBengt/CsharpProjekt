@@ -11,5 +11,16 @@ namespace Data
     {
         public string Beskrivning { get; set; }
         public string Title { get; set; }
+
+        public Avsnitt(){}
+
+        public Avsnitt(string beskrivning, string title)
+        {
+            Beskrivning = beskrivning;
+            Title = title;
+        }
+
     }
+
+
 }

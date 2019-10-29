@@ -61,7 +61,7 @@
             // btNyPod
             // 
             this.btNyPod.Location = new System.Drawing.Point(272, 334);
-            this.btNyPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btNyPod.Margin = new System.Windows.Forms.Padding(4);
             this.btNyPod.Name = "btNyPod";
             this.btNyPod.Size = new System.Drawing.Size(100, 28);
             this.btNyPod.TabIndex = 0;
@@ -72,7 +72,7 @@
             // btTaBortPod
             // 
             this.btTaBortPod.Location = new System.Drawing.Point(393, 334);
-            this.btTaBortPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btTaBortPod.Margin = new System.Windows.Forms.Padding(4);
             this.btTaBortPod.Name = "btTaBortPod";
             this.btTaBortPod.Size = new System.Drawing.Size(100, 28);
             this.btTaBortPod.TabIndex = 1;
@@ -83,7 +83,7 @@
             // btAndraPod
             // 
             this.btAndraPod.Location = new System.Drawing.Point(513, 334);
-            this.btAndraPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btAndraPod.Margin = new System.Windows.Forms.Padding(4);
             this.btAndraPod.Name = "btAndraPod";
             this.btAndraPod.Size = new System.Drawing.Size(100, 28);
             this.btAndraPod.TabIndex = 2;
@@ -94,7 +94,7 @@
             // btAndraKatagori
             // 
             this.btAndraKatagori.Location = new System.Drawing.Point(1033, 334);
-            this.btAndraKatagori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btAndraKatagori.Margin = new System.Windows.Forms.Padding(4);
             this.btAndraKatagori.Name = "btAndraKatagori";
             this.btAndraKatagori.Size = new System.Drawing.Size(100, 28);
             this.btAndraKatagori.TabIndex = 5;
@@ -104,7 +104,7 @@
             // btTaBortKategori
             // 
             this.btTaBortKategori.Location = new System.Drawing.Point(913, 334);
-            this.btTaBortKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btTaBortKategori.Margin = new System.Windows.Forms.Padding(4);
             this.btTaBortKategori.Name = "btTaBortKategori";
             this.btTaBortKategori.Size = new System.Drawing.Size(100, 28);
             this.btTaBortKategori.TabIndex = 4;
@@ -115,7 +115,7 @@
             // btNyKategori
             // 
             this.btNyKategori.Location = new System.Drawing.Point(792, 334);
-            this.btNyKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btNyKategori.Margin = new System.Windows.Forms.Padding(4);
             this.btNyKategori.Name = "btNyKategori";
             this.btNyKategori.Size = new System.Drawing.Size(100, 28);
             this.btNyKategori.TabIndex = 3;
@@ -126,7 +126,7 @@
             // tbKategori
             // 
             this.tbKategori.Location = new System.Drawing.Point(755, 284);
-            this.tbKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbKategori.Margin = new System.Windows.Forms.Padding(4);
             this.tbKategori.Name = "tbKategori";
             this.tbKategori.Size = new System.Drawing.Size(395, 22);
             this.tbKategori.TabIndex = 6;
@@ -134,7 +134,7 @@
             // tbUrlPod
             // 
             this.tbUrlPod.Location = new System.Drawing.Point(40, 284);
-            this.tbUrlPod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUrlPod.Margin = new System.Windows.Forms.Padding(4);
             this.tbUrlPod.Name = "tbUrlPod";
             this.tbUrlPod.Size = new System.Drawing.Size(260, 22);
             this.tbUrlPod.TabIndex = 7;
@@ -144,7 +144,7 @@
             // 
             this.lwKategori.HideSelection = false;
             this.lwKategori.Location = new System.Drawing.Point(755, 36);
-            this.lwKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lwKategori.Margin = new System.Windows.Forms.Padding(4);
             this.lwKategori.Name = "lwKategori";
             this.lwKategori.Size = new System.Drawing.Size(395, 198);
             this.lwKategori.TabIndex = 8;
@@ -160,7 +160,7 @@
             this.Kategori});
             this.lwPodcast.HideSelection = false;
             this.lwPodcast.Location = new System.Drawing.Point(39, 36);
-            this.lwPodcast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lwPodcast.Margin = new System.Windows.Forms.Padding(4);
             this.lwPodcast.Name = "lwPodcast";
             this.lwPodcast.Size = new System.Drawing.Size(572, 198);
             this.lwPodcast.TabIndex = 9;
@@ -194,7 +194,7 @@
             this.PodcastAvsnitt});
             this.lwPodAvsnitt.HideSelection = false;
             this.lwPodAvsnitt.Location = new System.Drawing.Point(40, 399);
-            this.lwPodAvsnitt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lwPodAvsnitt.Margin = new System.Windows.Forms.Padding(4);
             this.lwPodAvsnitt.Name = "lwPodAvsnitt";
             this.lwPodAvsnitt.Size = new System.Drawing.Size(572, 216);
             this.lwPodAvsnitt.TabIndex = 10;
@@ -211,7 +211,7 @@
             // tbAvsnittBeskrivning
             // 
             this.tbAvsnittBeskrivning.Location = new System.Drawing.Point(755, 399);
-            this.tbAvsnittBeskrivning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbAvsnittBeskrivning.Margin = new System.Windows.Forms.Padding(4);
             this.tbAvsnittBeskrivning.Multiline = true;
             this.tbAvsnittBeskrivning.Name = "tbAvsnittBeskrivning";
             this.tbAvsnittBeskrivning.Size = new System.Drawing.Size(395, 216);
@@ -291,7 +291,7 @@
             "Var 5:e minut",
             "Var 20:e minut"});
             this.cbFrekvens.Location = new System.Drawing.Point(311, 284);
-            this.cbFrekvens.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbFrekvens.Margin = new System.Windows.Forms.Padding(4);
             this.cbFrekvens.Name = "cbFrekvens";
             this.cbFrekvens.Size = new System.Drawing.Size(167, 24);
             this.cbFrekvens.TabIndex = 18;
@@ -306,7 +306,7 @@
             "Humor",
             "Historia"});
             this.cbKategori.Location = new System.Drawing.Point(487, 284);
-            this.cbKategori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbKategori.Margin = new System.Windows.Forms.Padding(4);
             this.cbKategori.Name = "cbKategori";
             this.cbKategori.Size = new System.Drawing.Size(125, 24);
             this.cbKategori.TabIndex = 19;
@@ -373,9 +373,10 @@
             this.Controls.Add(this.btAndraPod);
             this.Controls.Add(this.btTaBortPod);
             this.Controls.Add(this.btNyPod);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PodcastAppen";
             this.Text = "Podcast";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PodcastAppen_FormClosing);
             this.Load += new System.EventHandler(this.PodcastAppen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
