@@ -20,10 +20,10 @@ namespace CsharpProjekt
         public PodcastAppen()
         {
             InitializeComponent();
-            LoadForm();
             bll = new Bll();
+            LoadForm();
             bll.getSparadPodcastLista();
-            bll.getSparadKategorierLista();
+           bll.getSparadKategorierLista();
            FillKategoriList();
             FillPodcastList();
             
@@ -79,6 +79,7 @@ namespace CsharpProjekt
         {
         
             cbKategori.DataSource = kategoriLista;
+            
         }
 
         //private void FillAvsnittList(List<string> avsnittList)
@@ -100,6 +101,7 @@ namespace CsharpProjekt
         private void LoadForm()
         {
             this.cbFrekvens.SelectedIndex = 0;
+            bll.CreateJsonFile();
             
             this.tbAvsnittBeskrivning.ReadOnly = true;
             lwPodcast.FullRowSelect = true;
@@ -131,6 +133,7 @@ namespace CsharpProjekt
                 {
                     var namn = item.SubItems[0].Text;
                     var allaAvsnitt = bll.getPodcastAvsnittToString(namn);
+                    tbUrlPod.Text = bll.getUrlfromPodcast(namn);
                     foreach(var avsnitt in allaAvsnitt)
                     {
                         var avsnittTitle = avsnitt;
@@ -157,8 +160,9 @@ namespace CsharpProjekt
             string kategori = cbKategori.Text;
             string frekvens = cbFrekvens.Text;
             int index = lwPodcast.SelectedIndices[0];
+            string url = tbUrlPod.Text;
 
-            bll.ChangeJsonData(kategori, frekvens, index);
+            bll.ChangeJsonData(kategori, frekvens, index, url);
 
             bll.getSparadPodcastLista();
             lwPodcast.Items.Clear();
@@ -169,6 +173,7 @@ namespace CsharpProjekt
 
         private void btNyKategori_Click(object sender, EventArgs e)
         {
+           
             var kategori = tbKategori.Text;
             bll.nyKategori(kategori);
             bll.sparaKategorierLista();
@@ -195,14 +200,20 @@ namespace CsharpProjekt
 
         private void btTaBortKategori_Click(object sender, EventArgs e)
         {
-            int index = lwKategori.SelectedIndices[0];
-            string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
-            bll.DeleteKategoriFromJson(kategorinamn);
-            bll.getSparadKategorierLista();
-            lwKategori.Items.Clear();
-            cbKategori.DataSource = null;
-            FillKategoriList();
-            tbKategori.Clear();
+            if (lwKategori.SelectedItems.Count > 0)
+            {
+                int index = lwKategori.SelectedIndices[0];
+                string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
+                bll.DeleteKategoriFromJson(kategorinamn);
+                bll.getSparadKategorierLista();
+                lwKategori.Items.Clear();
+                cbKategori.DataSource = null;
+                FillKategoriList();
+                tbKategori.Clear();
+                bll.getSparadPodcastLista();
+                lwPodcast.Items.Clear();
+                FillPodcastList();
+            }
             
         }
 
@@ -289,6 +300,7 @@ namespace CsharpProjekt
             string nykategori = tbKategori.Text;
             int index = lwKategori.SelectedIndices[0];
             string oldkategori = lwKategori.Items[index].SubItems[0].Text;
+            
             bll.ChangeKategori(nykategori, index, oldkategori);
             bll.getSparadKategorierLista();
             lwKategori.Items.Clear();
