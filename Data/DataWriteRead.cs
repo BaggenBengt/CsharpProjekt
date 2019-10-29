@@ -105,6 +105,8 @@ namespace Data
             List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
             List<Podcast> podListSortedByKategori = new List<Podcast>();
 
+           
+
             foreach (Podcast p in podLista)
             {
                 if (kategori == p.Kategori)
