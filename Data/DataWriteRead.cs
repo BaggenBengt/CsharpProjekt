@@ -66,7 +66,7 @@ namespace Data
             foreach(var i in feed.Items)
             {
                 Avsnitt avsnitt = new Avsnitt();
-                avsnitt.Title = i.Title.Text;
+                avsnitt.Name = i.Title.Text;
                 avsnitt.Beskrivning = i.Summary.Text;
                 PoddensAvsnitt.Add(avsnitt);
 
