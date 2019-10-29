@@ -46,6 +46,20 @@ namespace Logic
             }
             return allaAvsnittToString;
         }
+        public string getUrlfromPodcast(string name)
+        {
+            var sortedList = getPodcastListByName(name);
+            var url = "";
+
+            foreach(var pod in sortedList)
+            {
+                url = pod.Url;
+
+
+            }
+
+            return url;
+        }
         private List<Podcast> getPodcastListByName(string name)
         {
             return allaPodcasts
@@ -173,10 +187,10 @@ namespace Logic
 
 
 
-        public void ChangeJsonData(string kategori, string frekvens, int index)
+        public void ChangeJsonData(string kategori, string frekvens, int index, string url)
         {
            
-            dWR.ChangeJsonData(kategori, frekvens, index);
+            dWR.ChangeJsonData(kategori, frekvens, index, url);
 
         }
 
@@ -189,7 +203,7 @@ namespace Logic
 
         public void DeleteKategoriFromJson(string kategori)
         {
-            dWR.DeleteKategoriFromJson(kategori);
+           allaPodcastsSorterade = dWR.DeleteKategoriFromJson(kategori);
 
         }
         public void SorteraEfterKategori(string kategori)
@@ -202,6 +216,11 @@ namespace Logic
         {
            allaPodcasts = dWR.ChangeJsonDataKategori(nykategori, index, oldkategori);
 
+
+        }
+        public void CreateJsonFile()
+        {
+            dWR.CreateJsonFile();
 
         }
 
