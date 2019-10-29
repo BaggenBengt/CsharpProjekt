@@ -219,16 +219,49 @@ namespace Data
 
         public void CreateJsonFile()
         {
+            var tomPodcastLisa = new List<Podcast>();
+            var kategori = new Kategorier("Ingen Kategori");
+            var KategoriLista = new List<Kategorier>();
+            KategoriLista.Add(kategori);
+
             if (!File.Exists("sparadepodcasts.Json"))
             {
-                using (File.Create("sparadepodcats.Json")) { } ;
+                var Serializer = new JsonSerializer
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
+
+                using (var sw = new StreamWriter("sparadepodcasts.Json"))
+                {
+                    using (var jtw = new JsonTextWriter(sw))
+                    {
+
+                        Serializer.Serialize(jtw, tomPodcastLisa);
+
+                    }
+                }
+
+
 
             }
 
             if(!File.Exists("kategorier.Json")){
 
-                using (File.Create("kategorier.Json")) ;
-            
+                var Serializer = new JsonSerializer
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
+
+                using (var sw = new StreamWriter("kategorier.Json"))
+                {
+                    using (var jtw = new JsonTextWriter(sw))
+                    {
+
+                        Serializer.Serialize(jtw, KategoriLista);
+
+                    }
+                }
+
             }
 
         }
