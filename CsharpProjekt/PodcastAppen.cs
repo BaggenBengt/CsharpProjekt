@@ -23,9 +23,9 @@ namespace CsharpProjekt
             InitializeComponent();
             bll = new Bll();
             LoadForm();
-            bll.getSparadPodcastLista();
+           bll.getSparadPodcastLista();
            bll.getSparadKategorierLista();
-           FillKategoriList();
+          FillKategoriList();
            
             
             bll.StartaTimer();
