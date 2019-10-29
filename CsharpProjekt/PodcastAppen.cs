@@ -15,20 +15,24 @@ namespace CsharpProjekt
     {
          
         public Bll bll { get; set; }
+        
 
         public PodcastAppen()
         {
             InitializeComponent();
-            LoadForm();
             bll = new Bll();
+            LoadForm();
             bll.getSparadPodcastLista();
+           bll.getSparadKategorierLista();
+           FillKategoriList();
             FillPodcastList();
+            
 
         }
 
         private void FillPodcastList()
         {
-           var podcastLista = bll.ConvertPodcastListToString();
+           var podcastLista = bll.ConvertPodcastListToString("HelaListan");
 
             int i = 0;
             
@@ -54,17 +58,40 @@ namespace CsharpProjekt
                 
             }
         }
+        private void FillKategoriList()
+        {
+            var kategoriLista = bll.ConvertKategorierListToString();
 
-         //private void FillAvsnittList(List<string> avsnittList)
-         //{
-         //    lwPodAvsnitt.Items.Clear();
-             
-         //    foreach (var avsnitt in avsnittList)
-         //    {
-         //        ListViewItem item = new ListViewItem(avsnitt.Name);
-         //        lwPodAvsnitt.Items.Add(item);
-         //    }
-         //}
+           
+
+            foreach (var kategori in kategoriLista)
+            {
+
+                ListViewItem item = new ListViewItem(kategori);
+                lwKategori.Items.Add(item);
+               
+     
+            }
+
+            fyllcbKategori(kategoriLista);         
+        }
+        private void fyllcbKategori(List<string> kategoriLista)
+        {
+        
+            cbKategori.DataSource = kategoriLista;
+            
+        }
+
+        //private void FillAvsnittList(List<string> avsnittList)
+        //{
+        //    lwPodAvsnitt.Items.Clear();
+
+        //    foreach (var avsnitt in avsnittList)
+        //    {
+        //        ListViewItem item = new ListViewItem(avsnitt.Name);
+        //        lwPodAvsnitt.Items.Add(item);
+        //    }
+        //}
 
         //private void FillAvsnittBeskrivning(Avsnitt avsnitt)
         //{
@@ -74,9 +101,11 @@ namespace CsharpProjekt
         private void LoadForm()
         {
             this.cbFrekvens.SelectedIndex = 0;
-            this.cbKategori.SelectedIndex = 0;
+            bll.CreateJsonFile();
+            
             this.tbAvsnittBeskrivning.ReadOnly = true;
             lwPodcast.FullRowSelect = true;
+            
         }
 
 
@@ -104,6 +133,7 @@ namespace CsharpProjekt
                 {
                     var namn = item.SubItems[0].Text;
                     var allaAvsnitt = bll.getPodcastAvsnittToString(namn);
+                    tbUrlPod.Text = bll.getUrlfromPodcast(namn);
                     foreach(var avsnitt in allaAvsnitt)
                     {
                         var avsnittTitle = avsnitt;
@@ -130,9 +160,9 @@ namespace CsharpProjekt
             string kategori = cbKategori.Text;
             string frekvens = cbFrekvens.Text;
             int index = lwPodcast.SelectedIndices[0];
-            string namn = lwPodcast.Items[index].SubItems[0].Text;
+            string url = tbUrlPod.Text;
 
-            bll.ChangeJsonData(kategori, frekvens, index);
+            bll.ChangeJsonData(kategori, frekvens, index, url);
 
             bll.getSparadPodcastLista();
             lwPodcast.Items.Clear();
@@ -143,7 +173,13 @@ namespace CsharpProjekt
 
         private void btNyKategori_Click(object sender, EventArgs e)
         {
-          
+           
+            var kategori = tbKategori.Text;
+            bll.nyKategori(kategori);
+            bll.sparaKategorierLista();
+            lwKategori.Items.Clear();
+            cbKategori.DataSource = null;
+            FillKategoriList();
         }
 
         private void cbKategori_SelectedIndexChanged(object sender, EventArgs e)
@@ -164,7 +200,20 @@ namespace CsharpProjekt
 
         private void btTaBortKategori_Click(object sender, EventArgs e)
         {
-            
+            if (lwKategori.SelectedItems.Count > 0)
+            {
+                int index = lwKategori.SelectedIndices[0];
+                string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
+                bll.DeleteKategoriFromJson(kategorinamn);
+                bll.getSparadKategorierLista();
+                lwKategori.Items.Clear();
+                cbKategori.DataSource = null;
+                FillKategoriList();
+                tbKategori.Clear();
+                bll.getSparadPodcastLista();
+                lwPodcast.Items.Clear();
+                FillPodcastList();
+            }
             
         }
 
@@ -179,7 +228,7 @@ namespace CsharpProjekt
 
         private void FillPodcastListByKategori()
         {
-            var podcastLista = bll.ConvertPodcastListToStringByKategori();
+            var podcastLista = bll.ConvertPodcastListToString("SorteradKategori");
 
             int i = 0;
 
@@ -232,5 +281,37 @@ namespace CsharpProjekt
                 }
             }
         }
+
+        private void lwKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lwKategori.SelectedItems.Count > 0)
+            {
+                var index = lwKategori.SelectedIndices[0];
+
+                string firstValue = lwKategori.Items[index].SubItems[0].Text;
+
+                tbKategori.Clear();
+                tbKategori.Text = firstValue;
+            } 
+        }
+
+        private void btAndraKatagori_Click(object sender, EventArgs e)
+        {
+            string nykategori = tbKategori.Text;
+            int index = lwKategori.SelectedIndices[0];
+            string oldkategori = lwKategori.Items[index].SubItems[0].Text;
+            
+            bll.ChangeKategori(nykategori, index, oldkategori);
+            bll.getSparadKategorierLista();
+            lwKategori.Items.Clear();
+            cbKategori.DataSource = null;
+            FillKategoriList();
+            bll.sparaPodcastLista();
+            lwPodcast.Items.Clear();
+            FillPodcastList();
+        
+
+
+    }
     }
 }

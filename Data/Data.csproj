@@ -48,6 +48,8 @@
     <Compile Include="DataWriteRead.cs" />
     <Compile Include="Interfaces\Class1.cs" />
     <Compile Include="Models\Avsnitt.cs" />
+    <Compile Include="Models\Kategorier.cs" />
+    <Compile Include="Models\KategorierLista.cs" />
     <Compile Include="Models\Media.cs" />
     <Compile Include="Models\Podcast.cs" />
     <Compile Include="Models\PodcastLista.cs" />

@@ -18,11 +18,14 @@ namespace Logic
         public List<Podcast> allaPodcasts { get; set; }
         public List<Podcast> allaPodcastsSorterade { get; set; }
 
+        public List<Kategorier> allaKategorier { get; set; }
+
         public DataWriteRead dWR { get; set; }
         public Bll()
         {
             allaPodcasts = new List<Podcast>();
             allaPodcastsSorterade = new List<Podcast>();
+            allaKategorier = new List<Kategorier>();    
              dWR = new DataWriteRead();
 
         }
@@ -42,6 +45,20 @@ namespace Logic
                 }
             }
             return allaAvsnittToString;
+        }
+        public string getUrlfromPodcast(string name)
+        {
+            var sortedList = getPodcastListByName(name);
+            var url = "";
+
+            foreach(var pod in sortedList)
+            {
+                url = pod.Url;
+
+
+            }
+
+            return url;
         }
         private List<Podcast> getPodcastListByName(string name)
         {
@@ -79,10 +96,28 @@ namespace Logic
             allaPodcasts.Add(nyPodcast);
         }
 
+        public void nyKategori(string kategori)
+        {
+            Kategorier nyKategori = new Kategorier(kategori);
+            addNyKategoriToList(nyKategori);
+        }
+
+        private void addNyKategoriToList(Kategorier nyKategori)
+        {
+            allaKategorier.Add(nyKategori);
+
+        }
+
         public void sparaPodcastLista()
         {
             
-            dWR.sparaPodcastListaTillJson(allaPodcasts);
+            dWR.sparaTillJson(allaPodcasts);
+        }
+
+        public void sparaKategorierLista()
+        {
+            dWR.sparaTillJson(allaKategorier);
+
         }
 
         public void getSparadPodcastLista()
@@ -90,12 +125,29 @@ namespace Logic
             
             allaPodcasts = dWR.getSparadPodcastListaFromJson();
         }
-
-        public List<List<string>> ConvertPodcastListToString() 
+        public void getSparadKategorierLista()
         {
+            allaKategorier = dWR.getKategorierFromJson();
+
+        }
+      
+
+        public List<List<string>> ConvertPodcastListToString(string val) 
+        {
+            var podcastlista = new List<Podcast>();
+            
+            switch(val){
+                case "HelaListan":
+                    podcastlista = allaPodcasts;
+                    break;
+                case "SorteradKategori":
+                    podcastlista = allaPodcastsSorterade;
+                    break;
+            }
             var allPodcastsInString = new List<List<string>>();
             var podcastProperty = new List<string>();
-            foreach (Podcast podcast in allaPodcasts)
+            
+            foreach (Podcast podcast in podcastlista)
             {
                 var kategori = podcast.Kategori;
                 var antalavsnitt = podcast.AntalAvsnitt.ToString();
@@ -112,13 +164,33 @@ namespace Logic
             }
             return allPodcastsInString;
         }
+        public List<string> ConvertKategorierListToString()
+        {
+            
+
+        
+            
+            var kategoriNamnList = new List<string>();
+
+            foreach (Kategorier kategori in allaKategorier)
+            {
+                var namnkategori = kategori.Kategori;
+
+                kategoriNamnList.Add(namnkategori);
+       
+
+               
+
+            }
+            return kategoriNamnList;
+        }
 
 
 
-        public void ChangeJsonData(string kategori, string frekvens, int index)
+        public void ChangeJsonData(string kategori, string frekvens, int index, string url)
         {
            
-            dWR.ChangeJsonData(kategori, frekvens, index);
+            dWR.ChangeJsonData(kategori, frekvens, index, url);
 
         }
 
@@ -128,32 +200,28 @@ namespace Logic
             dWR.DeleteJsonItem(podcastnamn);
 
         }
+
+        public void DeleteKategoriFromJson(string kategori)
+        {
+           allaPodcastsSorterade = dWR.DeleteKategoriFromJson(kategori);
+
+        }
         public void SorteraEfterKategori(string kategori)
         {
             
-            allaPodcastsSorterade = dWR.SorteraEfterKategori(kategori);
+            allaPodcastsSorterade = dWR.getSparadPodcastListaFromJson(kategori);
         }
 
-        public List<List<string>> ConvertPodcastListToStringByKategori()
+        public void ChangeKategori(string nykategori, int index, string oldkategori)
         {
-            var allPodcastsInString = new List<List<string>>();
-            var podcastProperty = new List<string>();
-            foreach (Podcast podcast in allaPodcastsSorterade)
-            {
-                var kategori = podcast.Kategori;
-                var antalavsnitt = podcast.AntalAvsnitt.ToString();
-                var frekvens = podcast.Frekvens;
-                var name = podcast.Name;
+           allaPodcasts = dWR.ChangeJsonDataKategori(nykategori, index, oldkategori);
 
-                podcastProperty.Add(name);
-                podcastProperty.Add(antalavsnitt);
-                podcastProperty.Add(frekvens);
-                podcastProperty.Add(kategori);
 
-                allPodcastsInString.Add(podcastProperty);
+        }
+        public void CreateJsonFile()
+        {
+            dWR.CreateJsonFile();
 
-            }
-            return allPodcastsInString;
         }
 
     }
