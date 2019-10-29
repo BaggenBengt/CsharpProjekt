@@ -9,7 +9,7 @@ namespace Data
 {
     public class Avsnitt : Media
     {
-        public string Beskrivning { get; set; }
-        public string Title { get; set; }
+        public string Beskrivning {get; set; }
+        public string Name { get; set; }
     }
 }

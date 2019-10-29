@@ -9,7 +9,7 @@ namespace Data
 {
    public class Podcast : Media
     {
-        public string Name { get; set; }
+        public string Name {get; set; }
         public string Url {get; set;}
         public string Frekvens {get; set;}
         public string Kategori { get; set;}
@@ -31,10 +31,10 @@ namespace Data
             AvsnittLista = dWR.getAvsnittFromUrl(url);
             Name = dWR.getPodcastTitleFromUrl(url);
 
-            AntalAvsnitt = getAntalAvsnitt();
+            AntalAvsnitt = getAntalInList();
         }
 
-        private int getAntalAvsnitt()
+        protected override int getAntalInList()
         {
             return AvsnittLista.Count();
         }

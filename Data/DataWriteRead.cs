@@ -15,7 +15,7 @@ namespace Data
     public class DataWriteRead
     {
 
-        public void sparaPodcastListaTillJson(List<Podcast> podcastLista)
+        public void sparaTillJson(List<Podcast> podcastLista)
         {
             var Serializer = new JsonSerializer
             {
@@ -30,6 +30,23 @@ namespace Data
                         Serializer.Serialize(jtw, podcastLista);
 
                     }
+            }
+        }
+        public void sparaTillJson(List<Kategorier> kategorierLista)
+        {
+            var Serializer = new JsonSerializer
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (var sw = new StreamWriter("kategorier.Json"))
+            {
+                using (var jtw = new JsonTextWriter(sw))
+                {
+
+                    Serializer.Serialize(jtw, kategorierLista);
+
+                }
             }
         }
         public string getPodcastTitleFromUrl(string url)
@@ -49,7 +66,7 @@ namespace Data
             foreach(var i in feed.Items)
             {
                 Avsnitt avsnitt = new Avsnitt();
-                avsnitt.Title = i.Title.Text;
+                avsnitt.Name = i.Title.Text;
                 avsnitt.Beskrivning = i.Summary.Text;
                 PoddensAvsnitt.Add(avsnitt);
 
@@ -76,6 +93,26 @@ namespace Data
             
         }
 
+        public List<Podcast> getSparadPodcastListaFromJson(string kategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
+            List<Podcast> podListSortedByKategori = new List<Podcast>();
+
+
+
+            foreach (Podcast p in podLista)
+            {
+                if (kategori == p.Kategori)
+                {
+
+                    podListSortedByKategori.Add(p);
+                }
+            }
+            return podListSortedByKategori;
+
+        }
+
         public void ChangeJsonData(string kategori, string frekvens, int index)
         {
 
@@ -88,6 +125,39 @@ namespace Data
             File.WriteAllText("sparadepodcasts.json", output);
 
         }
+   
+        public List<Podcast> ChangeJsonDataKategori(string nykategori, int index, string oldkategori)
+        {
+
+            string json = File.ReadAllText("kategorier.json");
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            jsonObj[index]["Kategori"] = nykategori;
+            
+
+            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText("kategorier.json", output);
+            List<Podcast> podlista = UpdatePodcastsNyKategori(nykategori, oldkategori);
+            return podlista;
+        }
+        private List<Podcast> UpdatePodcastsNyKategori(string nykategori, string oldkategori)
+        {
+            string json = File.ReadAllText("sparadepodcasts.json");
+            var items = JsonConvert.DeserializeObject<List<Podcast>>(json);
+
+            foreach(Podcast pod in items)
+            {
+                if(pod.Kategori == oldkategori)
+                {
+                    pod.Kategori = nykategori;
+                    
+                }
+
+            }
+            
+            var newJsonString = JsonConvert.SerializeObject(items);
+            File.WriteAllText("sparadepodcasts.json", newJsonString);
+            return items;
+        }
 
         public void DeleteJsonItem(String podcast)
         {
@@ -98,25 +168,36 @@ namespace Data
             File.WriteAllText("sparadepodcasts.json", newJsonString);
 
         }
-
-        public List<Podcast> SorteraEfterKategori(string kategori)
+        public void DeleteKategoriFromJson(String kategori)
         {
-            string json = File.ReadAllText("sparadepodcasts.json");
-            List<Podcast> podLista = JsonConvert.DeserializeObject<List<Podcast>>(json);
-            List<Podcast> podListSortedByKategori = new List<Podcast>();
+            string json = File.ReadAllText("kategorier.json");
+            var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
 
-           
+            var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Kategori != kategori));
+            File.WriteAllText("kategorier.json", newJsonString);
 
-            foreach (Podcast p in podLista)
-            {
-                if (kategori == p.Kategori)
-                {
-                    
-                    podListSortedByKategori.Add(p);
-                }
-            }
-            return podListSortedByKategori;
 
         }
+
+        public List<Kategorier> getKategorierFromJson()
+        {
+            var serializer = new JsonSerializer
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (var sr = new StreamReader("kategorier.Json"))
+            {
+                using (var jtr = new JsonTextReader(sr))
+                {
+                    List<Kategorier> kategorierLista = serializer.Deserialize<List<Kategorier>>(jtr);
+                    return kategorierLista;
+                }
+
+            }
+
+        }
+
+
     }
 }
