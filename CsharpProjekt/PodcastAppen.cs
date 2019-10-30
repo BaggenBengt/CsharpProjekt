@@ -180,9 +180,13 @@ namespace CsharpProjekt
                 {
                     MessageBox.Show("En podcast med det namnet finns redan!");
                 }
-                if (!Validering.CheckInternetConnection())
+               else if (!Validering.CheckInternetConnection())
                 {
                     MessageBox.Show("Du måste ha internet uppkoppling!");
+                }
+                else if (!Validering.IsValidFeedUrl(url))
+                {
+                    MessageBox.Show("Ange en korrekt rss url!");
                 }
                 else
                 {
@@ -240,10 +244,7 @@ namespace CsharpProjekt
       
 
 
-        private void tbUrlPod_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void PodcastAppen_Load(object sender, EventArgs e)
         {
@@ -315,10 +316,7 @@ namespace CsharpProjekt
                 
         }
 
-        private void cbKategori_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void btTaBortPod_Click(object sender, EventArgs e)
         {
@@ -347,29 +345,37 @@ namespace CsharpProjekt
         private void btTaBortKategori_Click(object sender, EventArgs e)
         {
 
-            if (lwKategori.SelectedItems.Count > 0)
+            try
             {
-                int index = lwKategori.SelectedIndices[0];
-                string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
-
-                if (Validering.CantRemoveIngenKategori(index))
+                if (lwKategori.SelectedItems.Count > 0)
                 {
+                    int index = lwKategori.SelectedIndices[0];
+                    string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
 
-                    MessageBox.Show("Kan inte ta bort 'Ingen Kategori'");
-                    tbKategori.Clear();
+                    if (Validering.CantRemoveIngenKategori(index))
+                    {
+
+                        MessageBox.Show("Kan inte ta bort 'Ingen Kategori'");
+                        tbKategori.Clear();
+                    }
+                    else
+                    {
+                        bll.DeleteKategoriFromJson(kategorinamn);
+                        bll.getSparadKategorierLista();
+                        lwKategori.Items.Clear();
+                        cbKategori.DataSource = null;
+                        FillKategoriList();
+                        tbKategori.Clear();
+                        bll.getSparadPodcastLista();
+                        lwPodcast.Items.Clear();
+                        FillPodcastList();
+                    }
                 }
-                else
-                {
-                    bll.DeleteKategoriFromJson(kategorinamn);
-                    bll.getSparadKategorierLista();
-                    lwKategori.Items.Clear();
-                    cbKategori.DataSource = null;
-                    FillKategoriList();
-                    tbKategori.Clear();
-                    bll.getSparadPodcastLista();
-                    lwPodcast.Items.Clear();
-                    FillPodcastList();
-                }
+            }
+            catch (Exception ex)
+            {
+
+                
             }
            
         }
@@ -441,10 +447,7 @@ namespace CsharpProjekt
             }
         }
 
-        private void lwPodAvsnitt_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
+     
 
         private void lwPodAvsnitt_SelectedIndexChanged_1(object sender, EventArgs e)
         {
@@ -494,25 +497,29 @@ namespace CsharpProjekt
 
         private void btAndraKatagori_Click(object sender, EventArgs e)
         {
-            int index = lwKategori.SelectedIndices[0];
-            string oldkategori = lwKategori.Items[index].SubItems[0].Text;
-            string nykategori = tbKategori.Text;
-            if (!Validering.isEmpty(nykategori))
+            try
             {
+                int index = lwKategori.SelectedIndices[0];
+                
                 string nykategori = tbKategori.Text;
+
+
                 if (!Validering.isEmpty(nykategori))
                 {
                     MessageBox.Show("Fältet får inte vara tomt!");
                 }
-                if (Validering.finnsKategorin(nykategori,bll))
+                if (Validering.finnsKategorin(nykategori, bll))
                 {
                     MessageBox.Show("Du kan inte ändra namnet till en kategori som redan finns!");
                 }
+                else if (Validering.CantModifyIngenKategori(index))
+                {
+                    MessageBox.Show("Går inte att ändra 'Ingen Kategori'");
+
+                }
                 else
                 {
-                    int index = lwKategori.SelectedIndices[0];
                     string oldkategori = lwKategori.Items[index].SubItems[0].Text;
-
                     bll.ChangeKategori(nykategori, index, oldkategori);
                     bll.getSparadKategorierLista();
                     lwKategori.Items.Clear();
@@ -524,33 +531,19 @@ namespace CsharpProjekt
 
                 }
             }
-
-            if (Validering.CantModifyIngenKategori(index))
+            catch (Exception ex)
             {
-                MessageBox.Show("Går inte att ändra 'Ingen Kategori'");
 
-            }
-            else
-            {
                 
-                
-
-                bll.ChangeKategori(nykategori, index, oldkategori);
-                bll.getSparadKategorierLista();
-                lwKategori.Items.Clear();
-                cbKategori.DataSource = null;
-                FillKategoriList();
-                bll.sparaPodcastLista();
-                lwPodcast.Items.Clear();
-                FillPodcastList();
-
             }
-        }
-        private void cbFrekvens_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            }
 
-        }
+          
+   
 
+            
+        
+     
         private void PodcastAppen_FormClosing(object sender, FormClosingEventArgs e)
         {
             try

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Data;
 
 namespace Logic.Validering
@@ -110,6 +112,25 @@ namespace Logic.Validering
                 return false;
             }
         }
+        public static bool IsValidFeedUrl(string url)
+        {
+            bool isValid = true;
+            try
+            {
+
+                XmlReader reader = XmlReader.Create(url);
+                Rss20FeedFormatter formatter = new Rss20FeedFormatter();
+                formatter.ReadFrom(reader);
+                reader.Close();
+            }
+            catch
+            {
+                isValid = false;
+            }
+
+            return isValid;
+        }
     }
+
 
 }
