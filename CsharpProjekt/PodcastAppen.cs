@@ -292,20 +292,30 @@ namespace CsharpProjekt
 
         private void btTaBortKategori_Click(object sender, EventArgs e)
         {
+
             if (lwKategori.SelectedItems.Count > 0)
             {
                 int index = lwKategori.SelectedIndices[0];
                 string kategorinamn = lwKategori.Items[index].SubItems[0].Text;
-                bll.DeleteKategoriFromJson(kategorinamn);
-                bll.getSparadKategorierLista();
-                lwKategori.Items.Clear();
-                cbKategori.DataSource = null;
-                FillKategoriList();
-                tbKategori.Clear();
-                bll.getSparadPodcastLista();
-                lwPodcast.Items.Clear();
-                FillPodcastList();
-                
+
+                if (Validering.CantRemoveIngenKategori(index))
+                {
+
+                    MessageBox.Show("Kan inte ta bort 'Ingen Kategori'");
+                    tbKategori.Clear();
+                }
+                else
+                {
+                    bll.DeleteKategoriFromJson(kategorinamn);
+                    bll.getSparadKategorierLista();
+                    lwKategori.Items.Clear();
+                    cbKategori.DataSource = null;
+                    FillKategoriList();
+                    tbKategori.Clear();
+                    bll.getSparadPodcastLista();
+                    lwPodcast.Items.Clear();
+                    FillPodcastList();
+                }
             }
             if (lwKategori.Items.Count <= 1)
             {
@@ -398,15 +408,23 @@ namespace CsharpProjekt
 
         private void btAndraKatagori_Click(object sender, EventArgs e)
         {
+            int index = lwKategori.SelectedIndices[0];
+            string oldkategori = lwKategori.Items[index].SubItems[0].Text;
             string nykategori = tbKategori.Text;
             if (!Validering.isEmpty(nykategori))
             {
                 MessageBox.Show("Fältet får inte vara tomt!");
             }
+
+            if (Validering.CantModifyIngenKategori(index))
+            {
+                MessageBox.Show("Går inte att ändra 'Ingen Kategori'");
+
+            }
             else
             {
-                int index = lwKategori.SelectedIndices[0];
-                string oldkategori = lwKategori.Items[index].SubItems[0].Text;
+                
+                
 
                 bll.ChangeKategori(nykategori, index, oldkategori);
                 bll.getSparadKategorierLista();

@@ -69,5 +69,33 @@ namespace Logic.Validering
             }
             return resultat;
         }
+
+        public static bool CantModifyIngenKategori(int index)
+        {
+            bool resultat = false;
+
+            if(index == 0)
+            {
+
+                resultat = true;
+                return resultat;
+            }
+
+            return resultat;
+            
+        }
+        public static bool CantRemoveIngenKategori(int index)
+        {
+            bool resultat = false;
+            if (index == 0)
+            {
+                resultat = true;
+                return resultat;
+
+            }
+            return resultat;
+
+        }
     }
+
 }

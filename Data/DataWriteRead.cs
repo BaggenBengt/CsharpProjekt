@@ -129,21 +129,22 @@ namespace Data
    
         public List<Podcast> ChangeJsonDataKategori(string nykategori, int index, string oldkategori)
         {
-
-            string json = File.ReadAllText("kategorier.json");
-            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
-            jsonObj[index]["Kategori"] = nykategori;
             
+                string json = File.ReadAllText("kategorier.json");
+                dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                jsonObj[index]["Kategori"] = nykategori;
 
-            string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText("kategorier.json", output);
-            List<Podcast> podlista = UpdatePodcastsNyKategori(nykategori, oldkategori);
-            return podlista;
 
+                string output = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText("kategorier.json", output);
+                List<Podcast> podlista = UpdatePodcastsNyKategori(nykategori, oldkategori);
+                return podlista;
+          
         }
       
         private List<Podcast> UpdatePodcastsNyKategori(string nykategori, string oldkategori)
         {
+
             string json = File.ReadAllText("sparadepodcasts.json");
             var items = JsonConvert.DeserializeObject<List<Podcast>>(json);
 
@@ -173,7 +174,7 @@ namespace Data
         }
         public List<Podcast> DeleteKategoriFromJson(String kategori)
         {
-            if (!kategori.Equals("Ingen Kategori")) {
+            
 
                 string json = File.ReadAllText("kategorier.json");
                 var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
@@ -182,18 +183,7 @@ namespace Data
                 File.WriteAllText("kategorier.json", newJsonString);
                 return UpdatePodcastsNyKategori("Ingen Kategori", kategori);
 
-            } 
-            else
-            {
-
-                string json = File.ReadAllText("kategorier.json");
-                var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
-
-                var newJsonString = JsonConvert.SerializeObject(items);
-                File.WriteAllText("kategorier.json", newJsonString);
-                return UpdatePodcastsNyKategori("Ingen Kategori", kategori);
-
-            }
+        
            
             
         }
