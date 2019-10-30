@@ -159,6 +159,10 @@ namespace CsharpProjekt
                 {
                     MessageBox.Show("En podcast med det namnet finns redan!");
                 }
+                if (!Validering.CheckInternetConnection())
+                {
+                    MessageBox.Show("Du måste ha internet uppkoppling!");
+                }
                 else
                 {
                     var frekvens = cbFrekvens.SelectedItem.ToString();
