@@ -95,6 +95,7 @@ namespace Logic.Validering
 
             }
             return resultat;
+        }
 
         public static bool CheckInternetConnection()
         {

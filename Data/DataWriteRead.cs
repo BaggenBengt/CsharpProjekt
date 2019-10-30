@@ -238,14 +238,22 @@ namespace Data
         }
         public List<Podcast> DeleteKategoriFromJson(String kategori)
         {
-            
 
-                    string json = File.ReadAllText("kategorier.json");
-                    var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
 
-                    var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Kategori != kategori));
-                    File.WriteAllText("kategorier.json", newJsonString);
-                    return UpdatePodcastsNyKategori("Ingen Kategori", kategori);
+            try
+            {
+                string json = File.ReadAllText("kategorier.json");
+                var items = JsonConvert.DeserializeObject<List<Kategorier>>(json);
+
+                var newJsonString = JsonConvert.SerializeObject(items.Where(i => i.Kategori != kategori));
+                File.WriteAllText("kategorier.json", newJsonString);
+                return UpdatePodcastsNyKategori("Ingen Kategori", kategori);
+            }
+            catch (Exception ex)
+            {
+                return UpdatePodcastsNyKategori("Ingen Kategori", kategori);
+
+            }
 
         
            
