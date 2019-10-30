@@ -27,8 +27,7 @@ namespace CsharpProjekt
             bll.getSparadPodcastLista();
             bll.getSparadKategorierLista();
             FillKategoriList();
-           
-            
+
             bll.StartaTimer();
             FillPodcastList();
             startaUpdateAvGuiAsync();
@@ -159,6 +158,10 @@ namespace CsharpProjekt
                 if(Validering.finnsPodcast(url, bll))
                 {
                     MessageBox.Show("En podcast med det namnet finns redan!");
+                }
+                if (!Validering.CheckInternetConnection())
+                {
+                    MessageBox.Show("Du måste ha internet uppkoppling!");
                 }
                 else
                 {
