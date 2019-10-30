@@ -233,12 +233,28 @@ namespace Logic
             return allaPodcasts.Where((pod) => pod.Frekvens.Equals(frekvens))
                 .ToList();
         }
-        
+
+        public List<Podcast> getPodcastListByUrl(string url)
+        {
+
+            return allaPodcasts.Where((pod) => pod.Url.Equals(url))
+                .ToList();
+        }
+
 
         public void StartaTimer()
         {
             foreach (var pod in allaPodcasts)
             {
+                pod.startaTimer(pod.Frekvens);
+            }
+        }
+        public void StartaTimer(string url)
+        {
+            var sortedList = getPodcastListByUrl(url);
+            foreach ( var pod in sortedList)
+            {
+                pod.timer.Stop();
                 pod.startaTimer(pod.Frekvens);
             }
         }
